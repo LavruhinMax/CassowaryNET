@@ -1,6 +1,7 @@
 ﻿using CassowaryApp.Data;
 using CassowaryApp.Model;
 using CassowaryApp.Pages;
+using CassowaryApp.Shared;
 using Microsoft.EntityFrameworkCore;
 
 namespace CassowaryApp.ViewModel
@@ -48,13 +49,40 @@ namespace CassowaryApp.ViewModel
             return File.ReadAllBytes(fullPath);
         }
 
+        public async Task addItem(Offer it)
+        {
+            _context.Offer.Add(it);
+            await _context.SaveChangesAsync();
+            await refreshPage();
+        }
+
+        public async Task updateItem(Offer it)
+        {
+            var offer = await _context.Offer.FindAsync(it.OfferID);
+
+            offer.itemName = it.itemName;
+            offer.itemType = it.itemType;
+            offer.Price = it.Price;
+            offer.Description = it.Description;
+            offer.Photo = it.Photo;
+
+            await _context.SaveChangesAsync();
+            await refreshPage();
+        }
+
         public async Task deleteItem(int itemId)
         {
             var item = await _context.Offer.FindAsync(itemId);
 
             _context.Offer.Remove(item);
             await _context.SaveChangesAsync();
+            await refreshPage();
+        }
 
+        public async Task refreshPage()
+        {
+            items = await _context.Offer.ToListAsync();
+            filteredItems = items;
         }
     }
 }

@@ -1,187 +1,252 @@
 ﻿<style>
     .item-popup {
-        position: fixed;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        top: 25%;
-        bottom: 25%;
-        left: 30%;
-        right: 30%;
-        background-color: whitesmoke;
-        border-radius: 0.5vw;
-        box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
-        overflow: hidden
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 20%;
+    bottom: 20%;
+    left: 30%;
+    right: 30%;
+    background-color: whitesmoke;
+    border-radius: 0.5vw;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+    overflow: hidden
     }
 
-        .item-popup p {
-            margin: 2vh 0;
-            font-size: 1vw;
-            font-weight: 600
-        }
-        
-    
+    .item-popup p {
+    margin: 2vh 0;
+    font-size: 1vw;
+    font-weight: 600
+    }
+
 
     .item-field-cnt {
-        display: flex;
-        flex: 1;
-        width: 100%;
-        flex-wrap: wrap;
-        background-color: gainsboro;
-        justify-content: space-between;
+    display: flex;
+    flex: 1;
+    width: 100%;
+    flex-wrap: wrap;
+    background-color: gainsboro;
+    justify-content: space-between;
     }
 
     .photo-cnt {
-        margin: 1vh 2vw;
-        height: max-content;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        column-gap: 2vh
+    margin: 1vh 2vw;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 2vh
     }
 
-        .photo-cnt button {
-            height: 4vh;
-            border: 1px solid olive;
-            background-color: olive;
-            color: white;
-            font-weight: 600;
-            font-size: 0.8vw;
-            margin: 0 0 0 1vw;
-            padding: 0 0.5vw;
-            border-radius: 0.3vw;
-            transition: 0.2s;
-            cursor: pointer
-        }
+    .photo-cnt button:hover {
+    border: 1px solid darkolivegreen;
+    background-color: darkolivegreen
+    }
 
-            .photo-cnt button:hover {
-                border: 1px solid darkolivegreen;
-                background-color: darkolivegreen
-            }
-
-        .photo-cnt img {
-            width: 5vw;
-            height: 5vw;
-            object-fit: cover;
-            object-position: center
-        }
-
+    .photo-cnt img {
+    height: 5vw;
+    object-fit: cover;
+    object-position: center
+    }
 
     .item-input-cnt {
-        margin: 1vh 2vw;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start
+    margin: 1vh 2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start
     }
 
-        .item-input-cnt p {
-            margin: 0 0 1vh 0;
-            font-size: 0.8vw;
-            font-weight: 600
-        }
+    .item-input-cnt p {
+    margin: 0 0 1vh 0;
+    font-size: 0.8vw;
+    font-weight: 600
+    }
 
-        .item-input-cnt input, .item-input-cnt select {
-            width: 100%;
-            font-size: 0.8vw;
-            font-weight: 600;
-            height: 4vh;
-            padding: 0 0 0 1%;
-            border-radius: 0;
-            border: 1px solid black;
-            margin: 0;
-            box-shadow: 0 0 3px rgba(0, 0, 0, 0.5)
-        }
+    .item-input-cnt input, .item-input-cnt select {
+    width: 100%;
+    font-size: 0.8vw;
+    font-weight: 600;
+    height: 4vh;
+    padding: 0 0 0 1%;
+    border-radius: 0;
+    border: 1px solid black;
+    margin: 0;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5)
+    }
 
-            .item-input-cnt input:focus {
-                border-color: indigo;
-                outline: none
-            }
+    .item-input-cnt input:focus {
+    border-color: indigo;
+    outline: none
+    }
 
     .button-cnt {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        column-gap: 1vw;
-        height: 15%;
-        width: 100%
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    column-gap: 1vw;
+    height: 15%;
+    width: 100%
     }
 
     .button-cnt-done, .button-cnt-cancel {
-        height: 4vh;
-        border: 1px solid indianred;
-        background-color: indianred;
-        color: white;
-        font-weight: 600;
-        font-size: 0.8vw;
-        padding: 0 0.5vw;
-        border-radius: 0.3vw;
-        transition: 0.2s;
-        cursor: pointer
+    height: 4vh;
+    border: 1px solid indianred;
+    background-color: indianred;
+    color: white;
+    font-weight: 600;
+    font-size: 0.8vw;
+    padding: 0 0.5vw;
+    border-radius: 0.3vw;
+    transition: 0.2s;
+    cursor: pointer
     }
 
     .button-cnt-cancel {
-        margin: 0 1vw 0 0;
-        border: 1px solid lightblue;
-        background-color: lightblue
+    margin: 0 1vw 0 0;
+    border: 1px solid lightblue;
+    background-color: lightblue
     }
 
     .button-cnt-done:hover {
-        background-color: red;
+    background-color: red;
     }
 
     .button-cnt-cancel:hover {
-        background-color: lightskyblue
+    background-color: lightskyblue
     }
 
     .exit {
-        position: absolute;
-        top: 25px;
-        right: 25px;
-        width: 2vw;
-        height: 2vw;
-        cursor: pointer
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    width: 2vw;
+    height: 2vw;
+    cursor: pointer
     }
 </style>
 
 <div class="item-popup" style="display:@(isVisible ? "flex" : "none")">
-    <p>Новый товар</p>
+    <p>@(isAdding ? "Новый товар" : "Изменить данные")</p>
     <div class="item-field-cnt">
         <div class="photo-cnt"> 
-            <img src="images/peak.jpg" />
-            <button>Изменить</button>
+            @if (!string.IsNullOrEmpty(photo64))
+            {
+                <img src="data:image/jpeg;base64,@photo64" />
+            }
+            <InputFile OnChange="OnInputFileChange" />
         </div>
         <div class="item-input-cnt" style="width: 50%">
             <p>Наименование</p>
-            <input />
+            <input @bind="name"/>
         </div>
         <div class="item-input-cnt" style="width: 35%">
             <p>Тип</p>
-            <select>
+            <select @bind="type">
                 <option>Маршрутизатор</option>
-                <option>ТВ-приставка</option>
-                <option>Видеокамера</option>
+                <option>Приставка</option>
+                <option>Камера</option>
             </select>
         </div>
         <div class="item-input-cnt" style="width: 35%">
-            <p>Стоимость</p>
-            <input />
+            <p>Стоимость (₽)</p>
+            <input @bind="price"/>
         </div>
         <div class="item-input-cnt" style="width: 100%">
             <p>Описание</p>
-            <input />
+            <input @bind="descr"/>
         </div>
     </div>
     <div class="button-cnt">
-        <button class="button-cnt-done">Добавить</button>
+        <button class="button-cnt-done" @onclick="checkAndConfirm">@(isAdding ? "Добавить" : "Изменить")</button>
         <button class="button-cnt-cancel" @onclick="Close">Отмена</button>
     </div>
     <img class="exit" src="images/exit.png" @onclick="Close" />
+    @if (message != string.Empty)
+    {
+        <p class="message">@message</p>
+    }
 </div>
 
 @code {
     [Parameter] public bool isVisible { get; set; }
     [Parameter] public EventCallback isVisibleChanged { get; set; }
+    [Parameter] public EventCallback<Offer> newOffer { get; set; }
+    [Parameter] public EventCallback<Offer> editOffer { get; set; }
+
+    [Parameter] public bool isAdding { get; set; }
+    [Parameter] public Offer offer { get; set; }
+    private IBrowserFile? selectedFile;
+
+    private string name = string.Empty, type = string.Empty, descr = string.Empty, photo64 = string.Empty;
+    decimal price = 0;
+    byte[] photo;
+
+    private string message = string.Empty;
+
+    protected override void OnParametersSet()
+    {
+        name = isVisible && !isAdding ? offer.itemName : string.Empty;
+        type = isVisible && !isAdding ? offer.itemType : string.Empty;
+        price = isVisible && !isAdding ? offer.Price : 0;
+        descr = isVisible && !isAdding ? offer.Description : string.Empty;
+        photo64 = isVisible && !isAdding ? offer.Photo64 : string.Empty;
+    }
+
+    private async Task OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        selectedFile = e.File;
+        await ConvertFileToBase64();
+    }
+
+    private async Task ConvertFileToBase64()
+    {
+        if (selectedFile != null)
+        {
+            using var stream = selectedFile.OpenReadStream();
+            using var memoryStream = new MemoryStream();
+            await stream.CopyToAsync(memoryStream);
+            photo = memoryStream.ToArray();
+
+            photo64 = Convert.ToBase64String(photo);
+        }
+    }
+
+    private async Task checkAndConfirm()
+    {
+        if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(type) || string.IsNullOrEmpty(descr) || string.IsNullOrEmpty(photo64))
+        {
+            message = "Заполните все поля!";
+            return;
+        }
+        else if (price <= 0)
+        {
+            message = "Цена должна быть положительным числом!";
+            return;
+        }
+        await Confirm();
+    }
+
+    private async Task Confirm()
+    {
+        Offer of = new Offer()
+            {
+                itemName = name,
+                itemType = type,
+                Price = price,
+                Description = descr,
+                Photo = photo,
+                Photo64 = photo64
+            };
+
+        if (isAdding)
+            await newOffer.InvokeAsync(of);
+        else
+            await editOffer.InvokeAsync(of);
+
+        Close();
+    }
 
     private void Close() => isVisibleChanged.InvokeAsync();
 }

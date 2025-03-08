@@ -27,21 +27,6 @@ namespace CassowaryApp.Service
             return isValid;
         }
 
-        public static bool isDateValid(string mm, string yy)
-        {
-            if (!int.TryParse(mm, out int month) || !int.TryParse(yy, out int year))
-                return false;
-            if (month < 1 || month > 12)
-                return false;
-
-            return true;
-        }
-
-        public static bool isCvcValid(string cvc)
-        {
-            return Regex.IsMatch(cvc, @"^\d{3}$");
-        }
-
         public static bool isNumValid(string number)
         {
             string cleanedNumber = Regex.Replace(number, @"[^\d]", "");

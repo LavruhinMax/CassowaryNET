@@ -81,7 +81,7 @@
         mail = e.Value?.ToString();
         if (mode)
         {
-            isFormatCorrect = await FormatChecker.validateMail(mail);
+            isFormatCorrect = FormatChecker.validateMail(mail);
         }
     }
 

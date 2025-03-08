@@ -39,7 +39,7 @@
     </div>
     <div class="button-row">
         <img src="images/add.png" @onclick=newItemWindow />
-        <img src="images/edit.png" />
+        <img src="images/edit.png" @onclick="editItemWindow"/>
         <img src="images/delete.png" @onclick="Delete" />
         @if (rowNotSelected)
         {
@@ -49,7 +49,7 @@
 </div>
 <Footer_v2 />
 
-<Item isVisible=isItemVisible isVisibleChanged="itemVisibility" />
+<Item offer="offer" isAdding="isAdding" newOffer="newItem" editOffer="editItem" isVisible=isItemVisible isVisibleChanged="itemVisibility" />
 <DeletePopup name="@selectedName" isVisible="@isSomethingDeleted" isVisibleChanged="deleteVisibility" />
 
 @code {
@@ -59,7 +59,9 @@
     private int selectedRow = 0;
     private bool rowNotSelected = false;
 
+    Offer offer = new Offer();
     private bool isItemVisible = false;
+    private bool isAdding; 
 
     protected override async Task OnInitializedAsync()
     {
@@ -70,6 +72,7 @@
     {
         rowNotSelected = false;
         selectedRow = itemId;
+        offer = ViewModel.filteredItems.FirstOrDefault(o => o.OfferID == itemId);
         selectedName = ViewModel.items.FirstOrDefault(i => i.OfferID == itemId).itemName;
     }
 
@@ -78,7 +81,7 @@
         searchOption = e.Value.ToString();
         ViewModel.Search(searchOption);
     }
-    
+
     private void Delete()
     {
         if (selectedRow == 0)
@@ -102,7 +105,33 @@
 
     private void newItemWindow()
     {
+        isAdding = true;
         isItemVisible = true;
+    }
+
+    private void editItemWindow()
+    {
+        if (selectedRow == 0)
+        {
+            rowNotSelected = true;
+            return;
+        }
+        isAdding = false;
+        isItemVisible = true;
+    }
+
+    private async Task newItem(Offer of)
+    {
+        selectedRow = 0;
+        searchOption = string.Empty;
+        await ViewModel.addItem(of);
+    }
+
+    private async Task editItem(Offer of)
+    {
+        selectedRow = 0;
+        searchOption = string.Empty;
+        await ViewModel.updateItem(of);
     }
 
     private void openAdminPage() => NavManager.NavigateTo("admin");

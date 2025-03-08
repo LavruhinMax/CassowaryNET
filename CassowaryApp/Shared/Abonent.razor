@@ -98,6 +98,16 @@
     background-color: lightskyblue
     }
 
+    .message {
+    position: absolute;
+    margin: 0;
+    color: red;
+    font-size: 1vw;
+    font-weight: 600;
+    bottom: 2%;
+    left: 2%
+    }
+
     .exit {
     position: absolute;
     top: 25px;
@@ -146,10 +156,14 @@
         </div>
     </div>
     <div class="button-cnt">
-        <button class="button-cnt-done" @onclick="Confirm">@(isAdding ? "Добавить" : "Изменить")</button>
+        <button class="button-cnt-done" @onclick="checkAndConfirm">@(isAdding ? "Добавить" : "Изменить")</button>
         <button class="button-cnt-cancel" @onclick="Close">Отмена</button>
     </div>
     <img class="exit" src="images/exit.png" @onclick="Close" />
+    @if (message != string.Empty)
+    {
+        <p class="message">@message</p>
+    }
 </div>
 
 @code {
@@ -163,6 +177,8 @@
 
     private string fName = string.Empty, mName = string.Empty, lName = string.Empty, adress = string.Empty, technology = string.Empty, email = string.Empty, phone = string.Empty;
 
+    private string message = string.Empty;
+
     protected override void OnParametersSet()
     {
         fName = isVisible && !isAdding ? abonent.firstName : string.Empty;
@@ -170,8 +186,29 @@
         lName = isVisible && !isAdding ? abonent.lastName : string.Empty;
         adress = isVisible && !isAdding ? abonent.Adress : string.Empty;
         technology = isVisible && !isAdding ? abonent.Technology : string.Empty;
-        email = isVisible && !isAdding ? abonent.Email: string.Empty;
+        email = isVisible && !isAdding ? abonent.Email : string.Empty;
         phone = isVisible && !isAdding ? abonent.phoneNumber : string.Empty;
+        message = string.Empty;
+    }
+
+    private async Task checkAndConfirm()
+    {
+        if (string.IsNullOrEmpty(fName) || string.IsNullOrEmpty(mName) || string.IsNullOrEmpty(lName) || string.IsNullOrEmpty(adress) || string.IsNullOrEmpty(technology) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(phone))
+        {
+            message = "Заполните все поля!";
+            return;
+        }
+        else if (!FormatChecker.validateMail(email))
+        {
+            message = "Email: неверный формат!";
+            return;
+        }
+        else if (!FormatChecker.validatePhone(phone))
+        {
+            message = "Телефон: неверный формат!";
+            return;
+        }
+        await Confirm();
     }
 
     private async Task Confirm()
@@ -191,7 +228,8 @@
 
         if (isAdding)
         {
-            int temp = Int32.Parse(lastAbonent.LSNumber) + 1;
+            int temp = 33000001;
+            if(lastAbonent != null) temp = Int32.Parse(lastAbonent.LSNumber) + 1;
             ab.LSNumber = temp.ToString();
             await newAbonent.InvokeAsync(ab);
         }

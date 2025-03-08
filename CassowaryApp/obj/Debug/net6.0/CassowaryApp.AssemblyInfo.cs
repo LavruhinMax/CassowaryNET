@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CassowaryApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b244b61475979377d77327df82fc6791c28da616")]
 [assembly: System.Reflection.AssemblyProductAttribute("CassowaryApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CassowaryApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

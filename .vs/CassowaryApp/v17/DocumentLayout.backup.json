@@ -1,7 +1,20 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\\u041C\u0430\u043A\u0441\u0438\u043C\\Documents\\Projects\\CassowaryApp\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B03BD35E-D4D9-4E9F-A5AE-3E3FD382348A}|CassowaryApp\\CassowaryApp.csproj|c:\\users\\\u043C\u0430\u043A\u0441\u0438\u043C\\documents\\projects\\cassowaryapp\\cassowaryapp\\shared\\item.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B03BD35E-D4D9-4E9F-A5AE-3E3FD382348A}|CassowaryApp\\CassowaryApp.csproj|solutionrelative:cassowaryapp\\shared\\item.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B03BD35E-D4D9-4E9F-A5AE-3E3FD382348A}|CassowaryApp\\CassowaryApp.csproj|c:\\users\\\u043C\u0430\u043A\u0441\u0438\u043C\\documents\\projects\\cassowaryapp\\cassowaryapp\\shared\\tariffwin.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B03BD35E-D4D9-4E9F-A5AE-3E3FD382348A}|CassowaryApp\\CassowaryApp.csproj|solutionrelative:cassowaryapp\\shared\\tariffwin.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B03BD35E-D4D9-4E9F-A5AE-3E3FD382348A}|CassowaryApp\\CassowaryApp.csproj|c:\\users\\\u043C\u0430\u043A\u0441\u0438\u043C\\documents\\projects\\cassowaryapp\\cassowaryapp\\shared\\abonent.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B03BD35E-D4D9-4E9F-A5AE-3E3FD382348A}|CassowaryApp\\CassowaryApp.csproj|solutionrelative:cassowaryapp\\shared\\abonent.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,6 +39,45 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Abonent.razor",
+              "DocumentMoniker": "C:\\Users\\\u041C\u0430\u043A\u0441\u0438\u043C\\Documents\\Projects\\CassowaryApp\\CassowaryApp\\Shared\\Abonent.razor",
+              "RelativeDocumentMoniker": "CassowaryApp\\Shared\\Abonent.razor",
+              "ToolTip": "C:\\Users\\\u041C\u0430\u043A\u0441\u0438\u043C\\Documents\\Projects\\CassowaryApp\\CassowaryApp\\Shared\\Abonent.razor",
+              "RelativeToolTip": "CassowaryApp\\Shared\\Abonent.razor",
+              "ViewState": "AgIAALQAAAAAAAAAAAAAAMMAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-08T16:54:41.669Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TariffWin.razor",
+              "DocumentMoniker": "C:\\Users\\\u041C\u0430\u043A\u0441\u0438\u043C\\Documents\\Projects\\CassowaryApp\\CassowaryApp\\Shared\\TariffWin.razor",
+              "RelativeDocumentMoniker": "CassowaryApp\\Shared\\TariffWin.razor",
+              "ToolTip": "C:\\Users\\\u041C\u0430\u043A\u0441\u0438\u043C\\Documents\\Projects\\CassowaryApp\\CassowaryApp\\Shared\\TariffWin.razor*",
+              "RelativeToolTip": "CassowaryApp\\Shared\\TariffWin.razor*",
+              "ViewState": "AgIAAMoAAAAAAAAAAAAiwOYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-08T14:19:11.85Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Item.razor",
+              "DocumentMoniker": "C:\\Users\\\u041C\u0430\u043A\u0441\u0438\u043C\\Documents\\Projects\\CassowaryApp\\CassowaryApp\\Shared\\Item.razor",
+              "RelativeDocumentMoniker": "CassowaryApp\\Shared\\Item.razor",
+              "ToolTip": "C:\\Users\\\u041C\u0430\u043A\u0441\u0438\u043C\\Documents\\Projects\\CassowaryApp\\CassowaryApp\\Shared\\Item.razor*",
+              "RelativeToolTip": "CassowaryApp\\Shared\\Item.razor*",
+              "ViewState": "AgIAANYAAAAAAAAAAAAiwN0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-08T14:18:57.06Z",
+              "EditorCaption": ""
             }
           ]
         }

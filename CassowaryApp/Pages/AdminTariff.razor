@@ -39,7 +39,7 @@
     </div>
     <div class="button-row">
         <img src="images/add.png" @onclick="newTariffWindow" />
-        <img src="images/edit.png" />
+        <img src="images/edit.png" @onclick="editTariffWindow" />
         <img src="images/delete.png" @onclick="Delete" />
         @if (rowNotSelected)
         {
@@ -53,18 +53,20 @@
 </div>
 <Footer_v2 />
 
-<TariffWin isVisible="isTariffVisible" isVisibleChanged="tariffVisibility" />
+<TariffWin tariff="tariff" isAdding="isAdding" newTariff="newTariff" editTariff="editTariff" isVisible="isTariffVisible" isVisibleChanged="tariffVisibility" />
 <DeletePopup name="@selectedName" isVisible="@isSomethingDeleted" isVisibleChanged="deleteVisibility" />
 
 @code {
     private bool isSomethingDeleted = false;
-    private string selectedName = "";
+    private string selectedName = string.Empty;
     private string searchOption = string.Empty;
     private int selectedRow = 0;
     private bool rowNotSelected = false;
     private bool firstTariffMessage = false;
 
+    Tariff tariff = new Tariff();
     private bool isTariffVisible = false;
+    private bool isAdding;
 
     protected override async Task OnInitializedAsync()
     {
@@ -76,6 +78,7 @@
         rowNotSelected = false;
         firstTariffMessage = false;
         selectedRow = tariffId;
+        tariff = ViewModel.filteredTariffs.FirstOrDefault(t => t.TariffID == tariffId);
         selectedName = ViewModel.tariffs.FirstOrDefault(t => t.TariffID == tariffId).Name;
     }
 
@@ -113,7 +116,33 @@
 
     private void newTariffWindow()
     {
+        isAdding = true;
         isTariffVisible = true;
+    }
+
+    private void editTariffWindow()
+    {
+        if (selectedRow == 0)
+        {
+            rowNotSelected = true;
+            return;
+        }
+        isAdding = false;
+        isTariffVisible = true;
+    }
+
+    private async Task newTariff(Tariff tr)
+    {
+        selectedRow = 0;
+        searchOption = string.Empty;
+        await ViewModel.addTariff(tr);
+    }
+
+    private async Task editTariff(Tariff tr)
+    {
+        selectedRow = 0;
+        searchOption = string.Empty;
+        await ViewModel.updateTariff(tr);
     }
 
     private void openAdminPage() => NavManager.NavigateTo("admin");

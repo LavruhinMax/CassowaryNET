@@ -54,7 +54,7 @@
 
 @code {
     private bool isSomethingDeleted = false;
-    private string selectedName = "";
+    private string selectedName = string.Empty;
     private int selectedRow = 0;
     private bool rowNotSelected = false;
     private string searchOption = string.Empty;
@@ -67,6 +67,7 @@
     protected override async Task OnInitializedAsync()
     {
         await ViewModel.InitializeAsync();
+        lastAbonent = ViewModel.filteredAbonents.Last();
     }
 
     private void selectItem(int abonentId)
@@ -124,10 +125,10 @@
 
     private async Task newAbonent(Customer ab)
     {
-        lastAbonent = ViewModel.filteredAbonents.Last();
         selectedRow = 0;
         searchOption = string.Empty;
         await ViewModel.addAbonent(ab);
+        lastAbonent = ViewModel.filteredAbonents.Last();
     }
 
     private async Task editAbonent(Customer ab)

@@ -116,12 +116,12 @@
                 <input class="date-input" placeholder="YY" @bind="yy" />
             </div>
             <input class="cvc-input" placeholder="CVC" type="password" @bind="cvc" />
-            <input style="width: 100%" class="single-input" placeholder="Номер карты" @bind=placeholder />
+            <input style="width: 100%" class="single-input" placeholder="Номер карты" @bind=placeholder @oninput="cardChanged" />
         </div>
     }
     else
     {
-        <input class="single-input" @bind="placeholder" />
+        <input class="single-input" @bind="placeholder" @oninput="cardChanged" />
     }
     <button class="@(isFormatCorrect ? "req-popup-button-enabled" : "req-popup-button-disabled")" @onclick="Confirm" disabled="@(!isFormatCorrect)">Подтвердить</button>
     <img class="exit" src="images/exit.png" @onclick="Close" />
@@ -142,6 +142,12 @@
         yy = string.Empty;
         cvc = string.Empty;
         placeholder = string.Empty;
+    }
+
+    private void cardChanged(ChangeEventArgs e)
+    {
+        placeholder = e.Value?.ToString();
+        isFormatCorrect = FormatChecker.isNumValid(placeholder);
     }
 
     private async Task Confirm()

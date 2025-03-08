@@ -152,3 +152,4 @@ C:\Users\Администратор\Downloads\CassowaryApp\obj\Debug\net6.0\Cass
 C:\Users\Администратор\Downloads\CassowaryApp\obj\Debug\net6.0\CassowaryApp.genruntimeconfig.cache
 C:\Users\Администратор\Downloads\CassowaryApp\obj\Debug\net6.0\ref\CassowaryApp.dll
 C:\Users\Максим\Documents\Projects\CassowaryApp\CassowaryApp\obj\Debug\net6.0\staticwebassets.upToDateCheck.txt
+C:\Users\Максим\Documents\Projects\CassowaryApp\CassowaryApp\obj\Debug\net6.0\CassowaryApp.sourcelink.json

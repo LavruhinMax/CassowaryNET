@@ -1,5 +1,6 @@
 ﻿using CassowaryApp.Data;
 using CassowaryApp.Model;
+using CassowaryApp.Shared;
 using Microsoft.EntityFrameworkCore;
 
 namespace CassowaryApp.ViewModel
@@ -41,6 +42,26 @@ namespace CassowaryApp.ViewModel
             }
         }
 
+        public async Task addTariff(Tariff tr)
+        {
+            _context.Tariff.Add(tr);
+            await _context.SaveChangesAsync();
+            await refreshPage();
+        }
+
+        public async Task updateTariff(Tariff tr)
+        {
+            var tariff = await _context.Tariff.FindAsync(tr.TariffID);
+
+            tariff.Name = tr.Name;
+            tariff.Price = tr.Price;
+            tariff.Content = tr.Content;
+            tariff.Illustration = tr.Illustration;
+
+            await _context.SaveChangesAsync();
+            await refreshPage();
+        }
+
         public async Task deleteTariff(int tariffId)
         {
             var customers = await _context.Customer.ToListAsync();
@@ -57,6 +78,13 @@ namespace CassowaryApp.ViewModel
 
             _context.Tariff.Remove(tariff);
             await _context.SaveChangesAsync();
+            await refreshPage();
+        }
+
+        public async Task refreshPage()
+        {
+            tariffs = await _context.Tariff.ToListAsync();
+            filteredTariffs = tariffs;
         }
     }
 }
