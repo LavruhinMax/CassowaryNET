@@ -1,0 +1,85 @@
+﻿@page "/settings"
+@inject Settings_ViewModel ViewModel
+
+<link href="css/settings.css" rel="stylesheet" />
+<PageTitle>Настройки</PageTitle>
+<Header />
+<div class="main">
+    <p class="title">Настройки</p>
+    <div class="container">
+        <div class="unit">
+            <p>Номер лицевого счета</p>
+            <input placeholder="@UserContext.LSnumber" disabled="disabled" />
+        </div>
+        <div class="unit">
+            <p>Дата подключения</p>
+            <input placeholder="@ViewModel.exchange.Date.ToString("dd.MM.yyyy")" disabled="disabled" />
+        </div>
+        <div class="unit">
+            <p>Адрес подключения</p>
+            <input style="width: 65%" placeholder="@UserContext.Adress" disabled="disabled" />
+        </div>
+        <div class="unit">
+            <p>Технология</p>
+            <input placeholder="@UserContext.Technology" disabled="disabled" />
+        </div>
+    </div>
+    <div class="contacts">
+        <div class="unit">
+            <p>Номер телефона</p>
+            <input placeholder="@UserContext.Phone" disabled="disabled" />
+            <img src="images/edit.jpg" @onclick="@(isPassVisible || isEmailVisible || isPhoneVisible ? () => {} : showPhoneChange)" />
+        </div>
+        <div class="unit">
+            <p>Электронная почта</p>
+            <input placeholder="@UserContext.Email" disabled="disabled" />
+            <img src="images/edit.jpg" @onclick="@(isPassVisible || isEmailVisible || isPhoneVisible ? () => {} : showEmailChange)" />
+        </div>
+    </div>
+    <div class="warn-cnt">
+        <div class="warning">
+            <img src="images/warn-gray.png" />
+            <p>Убедитесь, что контактные данные корректны, иначе мы не сможем связаться с Вами в будущем!</p>
+        </div>
+        <button @onclick="showPasswordChange" disabled="@(isPassVisible || isEmailVisible || isPhoneVisible)">Изменить пароль</button>
+        <button class="exit-button" @onclick="openLogin" disabled="@(isPassVisible || isEmailVisible || isPhoneVisible)">Выйти</button>
+    </div>
+</div>
+<Footer />
+
+<PasswordChanger isVisible="@isPassVisible" isVisibleChanged="passVisibility" changePass="changePass" />
+<EmailChanger isVisible="@isEmailVisible" isVisibleChanged="mailVisibility" changeMail="changeMail" />
+<PhoneChanger isVisible="@isPhoneVisible" isVisibleChanged="phoneVisibility" changePhone="changePhone" />
+
+@code {
+    private bool isPassVisible = false, isEmailVisible = false, isPhoneVisible = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ViewModel.InitializeAsync();
+    }
+
+    private void passVisibility() => isPassVisible = false;
+    private void mailVisibility() => isEmailVisible = false;
+    private void phoneVisibility() => isPhoneVisible = false;
+
+    private async Task changePass(string newPass)
+    {
+        await ViewModel.changePassword(newPass);
+    }
+
+    private async Task changeMail(string newMail)
+    {
+        await ViewModel.updateMail(newMail);
+    }
+
+    private async Task changePhone(string newPhone)
+    {
+        await ViewModel.updatePhone(newPhone);
+    }
+
+    private void showPasswordChange() => isPassVisible = true;
+    private void showPhoneChange() => isPhoneVisible = true;
+    private void showEmailChange() => isEmailVisible = true;
+    private void openLogin() => NavManager.NavigateTo("/");
+}

@@ -1,0 +1,30 @@
+﻿@page "/admin"
+
+<link href="css/admin.css" rel="stylesheet" />
+<Header_v2 />
+<div class="main">
+    <Back openPage="openLogin"/>
+    <div class="grid">
+        <div class="abonents" @onclick="openAbonents">
+            <img src="images/abonents.jpg" />
+            <p>Абоненты</p>
+        </div>
+        <div class="tariffs" @onclick="openTariffs">
+            <img src="images/tariffs.png" />
+            <p>Тарифы</p>
+        </div>
+        <div class="equipment" @onclick="openShop">
+            <img src="images/shop.jpg" />
+            <p>Магазин</p>
+        </div>
+    </div>
+</div>
+<Footer_v2 />
+
+@code {
+    private void openLogin() => NavManager.NavigateTo("/");
+    private void openAbonents() => NavManager.NavigateTo("adminAbonent");
+    private void openShop() => NavManager.NavigateTo("adminItem");
+    private void openTariffs() => NavManager.NavigateTo("adminTariff");
+}
+

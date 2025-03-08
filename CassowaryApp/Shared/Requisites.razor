@@ -1,0 +1,155 @@
+﻿<style>
+    .req-popup {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    top: 40%;
+    bottom: 30%;
+    left: 40%;
+    right: 40%;
+    background-color: rgb(40, 40, 40);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 0.5vw;
+    overflow: hidden
+    }
+
+    .req-popup img {
+    margin: 3vh 0 0 0;
+    width: 5vw;
+    height: 5vw
+    }
+
+    .input-cnt {
+    display: flex;
+    width: 85%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 2vh
+    }
+
+    .single-input, .date-input, .cvc-input {
+    width: 75%;
+    font-size: 0.8vw;
+    font-weight: 800;
+    padding: 2% 1%;
+    border: 2px solid black;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    transition: border-color 0.3s
+    }
+
+    .single-input:focus, .date-input:focus, .cvc-input:focus {
+    border-color: indigo;
+    outline: none
+    }
+
+    .date {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 35%
+    }
+
+    .date p {
+    margin: 0;
+    color: white;
+    font-size: 1vw;
+    font-weight: 600
+    }
+
+    .date-input {
+    width: 40%
+    }
+
+    .cvc-input {
+    width: 30%
+    }
+
+    .req-popup-button-enabled, .req-popup-button-disabled {
+    margin: 0 0 3vh 0;
+    height: 3.5vh;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.8vw;
+    background-color: darkorange;
+    border: 1px solid darkorange;
+    border-radius: 0.2vw;
+    transition: 0.2s
+    }
+
+    .req-popup-button-enabled:hover {
+    background-color: orange;
+    border: 1px solid orange
+    }
+
+    .req-popup-button-disabled {
+    background-color: gray;
+    border: 1px solid gray
+    }
+
+    .req-popup-button-disabled:hover {
+    background-color: gray
+    }
+
+    .req-popup img.exit {
+    position: absolute;
+    margin: 0;
+    top: 15px;
+    right: 15px;
+    width: 1.5vw;
+    height: 1.5vw;
+    cursor: pointer
+    }
+
+</style>
+
+<div class="req-popup" style="display:@(isVisible ? "flex" : "none" ); bottom:@(method == "Банковская карта" ? "25%" : "30%")">
+    <img src="@(method == "Банковская карта" ? "images/bank card.png" : method == "WebMoney" ? "images/webmoney.png" : "images/umoney.png")" />
+    @if (method == "Банковская карта")
+    {
+        <div class="input-cnt">
+            <div class="date">
+                <input class="date-input" placeholder="MM" @bind="mm" />
+                <p>/</p>
+                <input class="date-input" placeholder="YY" @bind="yy" />
+            </div>
+            <input class="cvc-input" placeholder="CVC" type="password" @bind="cvc" />
+            <input style="width: 100%" class="single-input" placeholder="Номер карты" @bind=placeholder />
+        </div>
+    }
+    else
+    {
+        <input class="single-input" @bind="placeholder" />
+    }
+    <button class="@(isFormatCorrect ? "req-popup-button-enabled" : "req-popup-button-disabled")" @onclick="Confirm" disabled="@(!isFormatCorrect)">Подтвердить</button>
+    <img class="exit" src="images/exit.png" @onclick="Close" />
+</div>
+
+@code {
+    [Parameter] public bool isVisible { get; set; }
+    [Parameter] public string method { get; set; }
+    [Parameter] public EventCallback isVisibleChanged { get; set; }
+    [Parameter] public EventCallback<paymentMethod> updateMethod { get; set; }
+    private string placeholder = string.Empty;
+    private string mm = string.Empty, yy = string.Empty, cvc = string.Empty;
+    private bool isFormatCorrect = false;
+
+    protected override void OnParametersSet()
+    {
+        mm = string.Empty;
+        yy = string.Empty;
+        cvc = string.Empty;
+        placeholder = string.Empty;
+    }
+
+    private async Task Confirm()
+    {
+        paymentMethod Method = new paymentMethod() { CustomerID = UserContext.ID, Method = method, Requisites = placeholder };
+        await updateMethod.InvokeAsync(Method);
+        Close();
+    }
+
+    private void Close() => isVisibleChanged.InvokeAsync();
+}

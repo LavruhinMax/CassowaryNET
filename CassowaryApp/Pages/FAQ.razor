@@ -1,0 +1,37 @@
+﻿@page "/faq"
+@inject FAQ_ViewModel ViewModel
+
+<link href="css/faq.css" rel="stylesheet" />
+<PageTitle>Часто задаваемы вопросы</PageTitle>
+<Header />
+<div class="main">
+    <div class="title">
+        <p>Часто задаваемые вопросы</p>
+    </div>
+    <div class="container">
+        @foreach (var group in ViewModel.Faq)
+        {
+            <div class="group">
+                <p>@group.group</p>
+            </div>
+            @foreach (var question in group.questions)
+            {
+                <div class="question" @onclick="() => showAnswer(question)">
+                    <p>@question.question</p>
+                    <img src="@((question.showAnswer) ? "images/arrow-up.png" : "images/arrow-down.png")" />
+                </div>
+                @if (question.showAnswer)
+                {
+                    <div class="answer">
+                        <p>@question.answer</p>
+                    </div>
+                }
+            }
+        }
+    </div>
+</div>
+<Footer />
+
+@code {
+    private void showAnswer(questionAnswer question) => question.showAnswer = !question.showAnswer;
+}

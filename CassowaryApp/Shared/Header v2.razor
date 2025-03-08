@@ -1,0 +1,51 @@
+﻿<style>
+    .head-panel {
+        height: 10vh;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: black;
+    }
+
+    .head-logo {
+        height: 80%;
+        margin: 0 2% 0 1%;
+        cursor: pointer;
+    }
+
+    .admin {
+        display: flex;
+        column-gap: 0.5vw;
+        align-items: center;
+        margin: 0 5vw 0 0
+    }
+
+        .admin img {
+            width: 1.5vw;
+            height: 1.5vw
+        }
+
+        .admin p {
+            margin: 0;
+            color: white;
+            font-size: 0.8vw;
+            font-weight: 600
+        }
+
+</style>
+
+<div class="head-panel">
+    <img class="head-logo" src="images/bird.png" @onclick="openLogin">
+    @if(!(UserContext.Status == null) && UserContext.Status == "Админ")
+    {
+        <div class="admin">
+            <img src="images/user.jpg"/>
+            <p>@UserContext.Name @UserContext.lastName</p>
+        </div>
+    }
+</div>
+
+@code {
+    private void openLogin() => NavManager.NavigateTo("/");
+    private void openMain() => NavManager.NavigateTo("main");
+}

@@ -1,0 +1,165 @@
+﻿<style>
+    .offer-popup {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 32.5%;
+    bottom: 32.5%;
+    left: 30%;
+    right: 30%;
+    background-color: rgb(40, 40, 40);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    border-radius: 0.5vw;
+    overflow: hidden
+    }
+
+    .offer-left-cnt {
+    display: flex;
+    height: 100%;
+    width: 50%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 2vh;
+    }
+
+    .offer-left-cnt img {
+    height: 70%
+    }
+
+    .offer-left-cnt p {
+    margin: 0;
+    color: white;
+    font-size: 1.2vw;
+    font-weight: 600
+    }
+
+    .offer-right-cnt {
+    display: flex;
+    height: 100%;
+    width: 50%;
+    flex-direction: column;
+    background-color: rgb(40, 40, 40)
+    }
+
+    .offer-row, .selected-offer-row {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #CD5700;
+    cursor: pointer
+    }
+
+    .selected-offer-row {
+    background-color: #CD5700
+    }
+
+    .offer-row p, .selected-offer-row p, .price {
+    color: white;
+    margin: 0 1vw;
+    font-size: 1vw;
+    font-weight: 600
+    }
+
+    .price {
+    font-style: italic
+    }
+
+    .button-offer-row {
+    height: 20%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center
+    }
+
+    .button-offer-row button {
+    height: 60%;
+    margin: 0 1vw;
+    background-color: red;
+    color: white;
+    font-weight: 600;
+    font-size: 0.8vw;
+    border: 1px solid red;
+    border-radius: 0.2vw;
+    transition: 0.2s;
+    cursor: pointer
+    }
+
+    .button-offer-row button:hover {
+    background-color: brown;
+    border: 1px solid brown
+    }
+
+    .exit {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 1.5vw;
+    height: 1.5vw;
+    cursor: pointer
+    }
+</style>
+
+<div class="offer-popup" style="display:@(isVisible ? "flex" : "none" )">
+    <div class="offer-left-cnt">
+        <img src="data:image/jpeg;base64,@offer.Photo64" />
+        <p>@offer.itemName</p>
+    </div>
+    <div class="offer-right-cnt">
+        <div style="height: 15%"></div>
+        <div class="@(chosenOption == 1 ? "selected-offer-row" : "offer-row" )" @onclick="setOne">
+            <p>Единовременно</p>
+            <p class="price">@offer.Price ₽</p>
+        </div>
+        <div class="@(chosenOption == 2 ? "selected-offer-row" : "offer-row" )" @onclick="setTwo">
+            <p>Рассрочка (2 г.)</p>
+            <p class="price">@((int)Math.Floor(offer.Price/24)) ₽ / Мес</p>
+        </div>
+        <div class="@(chosenOption == 3 ? "selected-offer-row" : "offer-row" )" @onclick="setThree">
+            <p>Аренда</p>
+            <p class="price">@((int)Math.Floor(offer.Price/48)) ₽ / Мес</p>
+        </div>
+        <div class="button-offer-row">
+            <button @onclick="Buy">Заказать</button>
+        </div>
+    </div>
+    <img class="exit" src="images/exit.png" @onclick="Close" />
+</div>
+
+@code {
+    [Parameter] public bool isVisible { get; set; }
+    [Parameter] public EventCallback isVisibleChanged { get; set; }
+    [Parameter] public EventCallback<Purchase> handleNewPurchase { get; set; }
+    [Parameter] public EventCallback<Transaction> handleNewTransaction { get; set; }
+    [Parameter] public string method { get; set; }
+    [Parameter] public Offer offer { get; set; }
+
+    private int chosenOption;
+
+    private void setOne() => chosenOption = 1;
+    private void setTwo() => chosenOption = 2;
+    private void setThree() => chosenOption = 3;
+
+    protected override void OnParametersSet()
+    {
+        if(isVisible) chosenOption = 1;
+    }
+
+    private async Task Buy()
+    {
+        string opt = chosenOption == 1 ? "Приобретен" : chosenOption == 2 ? "Рассрочка" : "Аренда";
+        Purchase purchase = new Purchase() { CustomerID = UserContext.ID, itemName = offer.itemName, itemType = offer.itemType, purchaseMethod = opt, purchaseDate = DateTime.Today };
+        await handleNewPurchase.InvokeAsync(purchase);
+        if (chosenOption == 1)
+        {
+            Transaction transaction = new Transaction() { CustomerID = UserContext.ID, Amount = offer.Price, Method = method, Date = DateTime.Today };
+            await handleNewTransaction.InvokeAsync(transaction);
+        }
+        Close();
+    }
+
+    private void Close() => isVisibleChanged.InvokeAsync();
+}

@@ -1,0 +1,107 @@
+﻿<style>
+    .card {
+    display: flex;
+    height: 225px;
+    width: 650px;
+    margin: 0 0 4vh 0;
+    border: 1px solid black;
+    border-radius: 8px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    background-color: white
+    }
+
+    .card:hover {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .illustration {
+    width: 35%;
+    object-fit: cover;
+    object-position: center
+    }
+
+    .info {
+    width: 65%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap
+    }
+
+    .info p {
+    width: 40%;
+    font-size: 24px;
+    font-weight: 600;
+    padding: 10px 20px;
+    margin: 0
+    }
+
+    .info button {
+    font-size: 24px;
+    font-weight: 600;
+    height: 50px;
+    background-color: firebrick;
+    color: white;
+    margin: 0 0 0 50px;
+    padding: 0 10px;
+    border: 1px solid firebrick;
+    border-radius: 6px
+    }
+
+    .info button:hover {
+    background-color: red;
+    border: 1px solid red
+    }
+
+    .icon-row {
+    width: 40%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 0
+    }
+
+    .icon-row img {
+    margin: 0 0 0 20px;
+    height: 25px;
+    width: 25px
+    }
+</style>
+
+<div class="card">
+    <div class="info">
+        <p>@tariff.Name</p>
+        <p style="font-style: italic">@(tariff.Price) ₽ / Мес</p>
+        <div class="icon-row">
+            @if (tariff.Content != null && tariff.Content.Contains("Интернет"))
+            {
+                <img src="images/internet.jpg" />
+            }
+            @if (tariff.Content != null && tariff.Content.Contains("ТВ"))
+            {
+                <img src="images/smart tv.png" />
+            }
+            @if (tariff.Content != null && tariff.Content.Contains("SIM"))
+            {
+                <img src="images/smartphone.jpg" />
+            }
+            @if (tariff.Content != null && tariff.Content.Contains("Видеонаблюдение"))
+            {
+                <img src="images/camera-icon.jpg" />
+            }
+        </div>
+        <button @onclick="handleClick">Выбрать</button>
+    </div>
+    <img class="illustration" src="data:image/jpeg;base64,@tariff.Illustration64" />
+</div>
+
+
+@code {
+    [Parameter] public Tariff tariff { get; set; }
+    [Parameter] public EventCallback onClick { get; set; }
+
+    private async Task handleClick()
+    {
+        await onClick.InvokeAsync(); 
+    }
+}

@@ -1,0 +1,150 @@
+﻿body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: Tahoma;
+    background-color: whitesmoke;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column
+}
+
+.main {
+    width: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background-color: whitesmoke;
+    position: relative
+}
+
+.title {
+    margin: 3vh 0 0 0;
+    font-size: 1.5vw;
+    font-weight: 600
+}
+
+input {
+    width: 80%;
+    padding: 1vh;
+    margin: 3vh 0 2vh 0;
+    border: 1px solid black;
+    border-radius: 0.4vw;
+    font-size: 1vw;
+}
+
+.table {
+    width: 85%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: white
+}
+
+.table-head-row {
+    width: 100%;
+    height: 7.5vh;
+    display: flex;
+    color: white;
+    background-color: rgb(20, 20, 20);
+    justify-content: flex-start;
+    align-items: center
+}
+
+.table-row, .selected-row {
+    width: 100%;
+    height: 6vh;
+    display: flex;
+    border: 1px solid black;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer
+}
+
+.selected-row {
+    background-color: lightgray;
+    border: 1px solid #CD5700
+}
+
+    .table-head-row p, .table-row p, .selected-row p {
+        margin: 0 0 0 1vw;
+        font-size: 0.8vw;
+        font-weight: 600
+    }
+
+    .table-head-row p {
+            font-size: 1vw
+    }
+
+.nothing-found {
+    width: 100%;
+    height: 6vh;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+    .nothing-found p {
+        color: red;
+        font-size: 1.2vw;
+        font-weight: 600
+    }
+
+.id {
+    width: 5%
+}
+
+.fio {
+    width: 30%
+}
+
+.tariff {
+    width: 10%
+}
+
+.tech {
+    width: 10%
+}
+
+.phone {
+    width: 15%
+}
+
+.email {
+    flex: 1
+}
+
+.button-row {
+    width: 85%;
+    height: 12.5%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start
+}
+
+    .button-row img {
+        width: 3vw;
+        height: 3vw;
+        cursor: pointer;
+        margin: 0 2vw 0 0
+    }
+
+        .button-row img:hover {
+            width: 3.2vw;
+            height: 3.2vw
+        }
+
+    .button-row p {
+        margin: 0 5vw;
+        font-size: 1vw;
+        font-weight: 600;
+        color: red
+    }

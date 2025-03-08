@@ -1,0 +1,117 @@
+﻿<style>
+    .stop-popup {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 35%;
+    bottom: 35%;
+    left: 30%;
+    right: 30%;
+    background-color: lightgray;
+    border-radius: 0.5vw;
+    overflow: hidden
+    }
+
+    .stop-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20%;
+    font-size: 1vw;
+    font-weight: 600;
+    margin: 0
+    }
+
+    .stop-cnt {
+    display: flex;
+    width: 100%;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center
+    }
+
+    .stop-cnt img {
+    height: 5vw;
+    width: 5vw;
+    margin: 0 0 0 1vw;
+    object-fit: cover;
+    object-position: center
+    }
+
+    .stop-cnt p {
+    width: 75%;
+    margin: 0 1vw 0 0;
+    font-size: 0.9vw;
+    font-weight: 500;
+    line-height: 3vh
+    }
+
+    .stop-button-row {
+    display: flex;
+    height: 30%;
+    width: 80%;
+    align-items: center;
+    justify-content: space-between
+    }
+
+    .stop-ok-button, .stop-cancel-button {
+    width: 40%;
+    height: 4vh;
+    background-color: whitesmoke;
+    color: firebrick;
+    font-weight: 600;
+    font-size: 1vw;
+    padding: 0 0.5vw;
+    border: 1px solid firebrick;
+    border-radius: 0.4vw;
+    transition: 0.2s;
+    cursor: pointer
+    }
+
+    .stop-cancel-button {
+    color: blue;
+    border: 1px solid blue
+    }
+
+    .stop-ok-button:hover {
+    background-color: red;
+    border: 1px solid red
+    }
+
+    .stop-cancel-button:hover {
+    background-color: darkblue;
+    border: 1px solid darkblue
+    }
+
+</style>
+
+<div class="stop-popup" style="display:@(isVisible ? "flex" : "none" )">
+    <p class="stop-title">@(UserContext.isPaused == 0 ? "Вы действительно хотите поставить тариф на блокировку?" : "Возобновить тариф?")</p>
+    
+    <div class="stop-cnt">
+        <img src="images/stop.png"/>
+        <p>@(UserContext.isPaused == 0 ? "Ежемесячные автоплатежи будут приостановлены, однако доступ к нашим услугам станет ограничен. Возобновить тарифный план вы сможете в любой удобный момент" : "Ежемесячные автоплатежи будут восстановлены, и вы сможете продолжить пользоваться всеми преимуществами выбранного тарифа")</p>
+    </div>
+    <div class="stop-button-row">
+        <button class="stop-ok-button" @onclick="Confirm">Подтвердить</button>
+        <button class="stop-cancel-button" @onclick="Close">Отмена</button>
+    </div>
+</div>
+
+@code {
+    [Parameter] public bool isVisible { get; set; }
+    [Parameter] public EventCallback isVisibleChanged { get; set; }
+    [Parameter] public EventCallback handleTariffStopped { get; set; }
+
+    private async Task Confirm()
+    {
+        if (UserContext.isPaused == 0) UserContext.isPaused = 1;
+        else UserContext.isPaused = 0;
+        await handleTariffStopped.InvokeAsync();
+        Close();
+    }
+
+    private void Close() => isVisibleChanged.InvokeAsync();
+}

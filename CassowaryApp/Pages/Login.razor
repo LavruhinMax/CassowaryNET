@@ -1,0 +1,113 @@
+﻿@page "/"
+@inject Login_ViewModel ViewModel
+
+<link href="css/login.css" rel="stylesheet" />
+<PageTitle>Вход</PageTitle>
+<div class="logo-container">
+    <img src="images/bird.png" />
+    <p>CASSOWARY .NET</p>
+</div>
+<div class="contacts" @onclick="showContacts">
+    <img src="images/mail.jpg"/>
+    <p>Контакты</p>
+</div>
+<button class="fast-enter" @onclick="openMain">Войти под случайной учеткой</button>
+<div class="page">
+    <div class="login-container">
+        <p class="title">Вход в личный кабинет</p>
+        <div class="options">
+            <button class="@((mode) ? "option-button" : "")" @onclick="@((mode) ? (Action)(() => { }) : switchMode)">По электронной почте</button>
+            <button class="@((mode) ? "" : "option-button")" @onclick="@((mode) ? switchMode : (Action)(() => { }))">По номеру ЛС</button>
+        </div>
+        <div class="input-container">
+            <input class="login-input" @bind="login" @oninput="mailChanged" placeholder="@((mode) ? "Электронная почта" : "Номер лицевого счета")">
+            @if (!isFormatCorrect)
+            {
+                <img class="warning" src="images/warn.png">
+            }
+        </div>
+        <div class="input-container">
+            <input class="password-input" @bind="pass" @oninput="passChanged" type="@((showPass) ? "text" : "password")" placeholder="Пароль">
+            <img class="eye-icon" src="@((showPass) ? "images/eye-opened.png" : "images/eye-closed.png")" @onclick="coverOrUncoverPassword">
+        </div>
+        <button class="enter-button" @onclick="checkInput">Вход</button>
+        <p class="txt">
+            Нажимая на кнопку "Вход", вы соглашаетесь с
+            <a href="/policy" target="_blank">условиями пользования</a>
+        </p>
+        @if (showMessage)
+        {
+            <div class="message">
+                @if (!isFormatCorrect)
+                {
+                    <p>Неверный формат электронной почты!</p>
+                }
+                else if(areFieldsEmpty)
+                {
+                    <p>Заполните оба поля!</p>
+                }
+                else
+                {
+                    <p>Неверный логин или пароль!</p>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+<Contacts isVisible="@isPopupVisible" isVisibleChanged="Visibility"/>
+
+@code {
+    private bool showPass = false;
+    private bool mode = true;
+    private string login  = "";
+    private string pass = "";
+    private string mail = "";
+    private bool areFieldsEmpty = false, showMessage = false, isPopupVisible = false;
+    private bool isFormatCorrect = true, isInputCorrect = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if(!(UserContext.Status == null)) {
+            login = UserContext.Login;
+            pass = UserContext.Password;
+        }
+        await ViewModel.InitializeAsync();
+    }
+
+    private async Task mailChanged(ChangeEventArgs e)
+    {
+        showMessage = false;
+        mail = e.Value?.ToString();
+        if (mode)
+        {
+            isFormatCorrect = await FormatChecker.validateMail(mail);
+        }
+    }
+
+    private void passChanged(ChangeEventArgs e) => showMessage = false;
+
+    private void checkInput()
+    {
+        areFieldsEmpty = string.IsNullOrEmpty(login) || string.IsNullOrEmpty(pass);
+        isInputCorrect = ViewModel.check(login, pass, mode);
+        if (!areFieldsEmpty && isFormatCorrect && isInputCorrect)
+        {
+            if (UserContext.Status == "Админ") NavManager.NavigateTo("admin");
+            else NavManager.NavigateTo("main");
+        }
+        else showMessage = true;
+    }
+
+    private void openMain()
+    {
+        ViewModel.setRandomUserContext();
+        NavManager.NavigateTo("main");
+    }
+
+    private void Visibility() => isPopupVisible = false;
+
+    private void showContacts() => isPopupVisible = true;
+    private void coverOrUncoverPassword() => showPass = !showPass;
+    private void switchMode() => mode = !mode;
+}

@@ -1,0 +1,141 @@
+﻿@page "/adminAbonent"
+@inject AdminAbonent_ViewModel ViewModel
+
+<link href="css/adminAbonent.css" rel="stylesheet" />
+<Header_v2 />
+<div class="main">
+    <Back openPage="openAdminPage" />
+    <p class="title">Список абонентов</p>
+    <input type="text" placeholder="Поиск по ФИО" @oninput="inputChanged" />
+    <div class="table">
+        <div class="table-head-row">
+            <p class="id">id</p>
+            <p class="fio">ФИО</p>
+            <p class="tariff">Тариф</p>
+            <p class="tech">Технология</p>
+            <p class="phone">Телефон</p>
+            <p class="email">E-mail</p>
+        </div>
+        @if (ViewModel.filteredAbonents.Count == 0)
+        {
+            <div class="nothing-found">
+                <p>&lt;Список пуст&gt;</p>
+            </div>
+        }
+        else
+        {
+            @foreach (var ab in ViewModel.filteredAbonents)
+            {
+                <div class="@(ab.CustomerID == selectedRow ? "selected-row" : "table-row")" @onclick="() => selectItem(ab.CustomerID)">
+                    <p class="id">@ab.CustomerID</p>
+                    <p class="fio">@ab.lastName @ab.firstName @ab.middleName</p>
+                    <p class="tariff">@ViewModel.tariffs.FirstOrDefault(t => t.TariffID == ab.TariffID).Name</p>
+                    <p class="tech">@ab.Technology</p>
+                    <p class="phone">@ab.phoneNumber</p>
+                    <p class="email">@ab.Email</p>
+                </div>
+            }
+        }
+    </div>
+    <div class="button-row">
+        <img src="images/add.png" @onclick="newAbonentWindow" />
+        <img src="images/edit.png" @onclick="editAbonentWindow" />
+        <img src="images/delete.png" @onclick="Delete" />
+        @if (rowNotSelected)
+        {
+            <p>Выберите абонента для редактирования/удаления!</p>
+        }
+    </div>
+</div>
+<Footer_v2 />
+
+<Abonent abonent="abonent" lastAbonent="lastAbonent" isAdding="isAdding" newAbonent="newAbonent" editAbonent="editAbonent" isVisible=isAbonentVisible isVisibleChanged="abonentVisibility" />
+<DeletePopup name="@selectedName" isVisible="@isSomethingDeleted" isVisibleChanged="deleteVisibility" />
+
+@code {
+    private bool isSomethingDeleted = false;
+    private string selectedName = "";
+    private int selectedRow = 0;
+    private bool rowNotSelected = false;
+    private string searchOption = string.Empty;
+
+    Customer abonent = new Customer();
+    Customer lastAbonent = new Customer();
+    private bool isAbonentVisible = false;
+    private bool isAdding;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ViewModel.InitializeAsync();
+    }
+
+    private void selectItem(int abonentId)
+    {
+        rowNotSelected = false;
+        selectedRow = abonentId;
+        abonent = ViewModel.filteredAbonents.FirstOrDefault(a => a.CustomerID == abonentId);
+        selectedName = ViewModel.filteredAbonents.FirstOrDefault(a => a.CustomerID == abonentId)?.lastName + " " +
+            ViewModel.filteredAbonents.FirstOrDefault(a => a.CustomerID == abonentId)?.firstName;
+    }
+
+    private void inputChanged(ChangeEventArgs e)
+    {
+        searchOption = e.Value.ToString();
+        ViewModel.Search(searchOption);
+    }
+
+    private void Delete()
+    {
+        if (selectedRow == 0)
+        {
+            rowNotSelected = true;
+            return;
+        }
+        isSomethingDeleted = true;
+    }
+
+    private async Task deleteVisibility(bool result)
+    {
+        isSomethingDeleted = false;
+        if (result)
+        {
+            await ViewModel.deleteAbonent(selectedRow);
+        }
+    }
+
+    private void abonentVisibility() => isAbonentVisible = false;
+
+    private void newAbonentWindow()
+    {
+        isAdding = true;
+        isAbonentVisible = true;
+    }
+
+    private void editAbonentWindow()
+    {
+        if (selectedRow == 0)
+        {
+            rowNotSelected = true;
+            return;
+        }
+        isAdding = false;
+        isAbonentVisible = true;
+    }
+
+    private async Task newAbonent(Customer ab)
+    {
+        lastAbonent = ViewModel.filteredAbonents.Last();
+        selectedRow = 0;
+        searchOption = string.Empty;
+        await ViewModel.addAbonent(ab);
+    }
+
+    private async Task editAbonent(Customer ab)
+    {
+        selectedRow = 0;
+        searchOption = string.Empty;
+        await ViewModel.updateAbonent(ab);
+    }
+
+    private void openAdminPage() => NavManager.NavigateTo("admin");
+}

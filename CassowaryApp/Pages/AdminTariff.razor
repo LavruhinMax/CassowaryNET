@@ -1,0 +1,120 @@
+﻿@page "/adminTariff"
+@inject AdminTariff_ViewModel ViewModel
+
+<link href="css/adminTariff.css" rel="stylesheet" />
+<Header_v2 />
+<div class="main">
+    <Back openPage="openAdminPage" />
+    <p class="title">Список тарифов</p>
+    <input type="text" placeholder="Поиск по наименованию" @oninput="inputChanged" />
+    <div class="table">
+        <div class="table-head-row">
+            <p class="id">id</p>
+            <p class="photo">Фото</p>
+            <p class="name">Наименование</p>
+            <p class="price">Стоимость</p>
+            <p class="content">Наполнение</p>
+        </div>
+        @if(ViewModel.filteredTariffs.Count == 0)
+        {
+            <div class="nothing-found">
+                <p>&lt;Список пуст&gt;</p>
+            </div>
+        }
+        else 
+        {
+            foreach (var tar in ViewModel.filteredTariffs)
+            {
+                <div class="@(tar.TariffID == selectedRow ? "selected-row" : "table-row")" @onclick="() => selectTariff(tar.TariffID)">
+                    <p class="id">@tar.TariffID</p>
+                    <div class="img-cnt">
+                        <img src="data:image/jpeg;base64,@tar.Illustration64" />
+                    </div>
+                    <p class="name">@tar.Name</p>
+                    <p class="price">@tar.Price ₽</p>
+                    <p class="content">@tar.Content</p>
+                </div>
+            }
+        }
+    </div>
+    <div class="button-row">
+        <img src="images/add.png" @onclick="newTariffWindow" />
+        <img src="images/edit.png" />
+        <img src="images/delete.png" @onclick="Delete" />
+        @if (rowNotSelected)
+        {
+            <p>Выберите тариф для редактирования/удаления!</p>
+        }
+        else if(firstTariffMessage)
+        {
+            <p>Удаление тарифа с ID = 1 невозможно, так как это системный тариф, назначаемый по умолчанию</p>
+        }
+    </div>
+</div>
+<Footer_v2 />
+
+<TariffWin isVisible="isTariffVisible" isVisibleChanged="tariffVisibility" />
+<DeletePopup name="@selectedName" isVisible="@isSomethingDeleted" isVisibleChanged="deleteVisibility" />
+
+@code {
+    private bool isSomethingDeleted = false;
+    private string selectedName = "";
+    private string searchOption = string.Empty;
+    private int selectedRow = 0;
+    private bool rowNotSelected = false;
+    private bool firstTariffMessage = false;
+
+    private bool isTariffVisible = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ViewModel.InitializeAsync();
+    }
+
+    private void selectTariff(int tariffId)
+    {
+        rowNotSelected = false;
+        firstTariffMessage = false;
+        selectedRow = tariffId;
+        selectedName = ViewModel.tariffs.FirstOrDefault(t => t.TariffID == tariffId).Name;
+    }
+
+    private void inputChanged(ChangeEventArgs e)
+    {
+        searchOption = e.Value.ToString();
+        ViewModel.Search(searchOption);
+    }
+
+    private void Delete()
+    {
+        if (selectedRow == 0)
+        {
+            rowNotSelected = true;
+            return;
+        }
+        else if(selectedRow == 1)
+        {
+            firstTariffMessage = true;
+            return;
+        }
+        isSomethingDeleted = true;
+    }
+
+    private async Task deleteVisibility(bool result)
+    {
+        isSomethingDeleted = false;
+        if (result)
+        {
+            await ViewModel.deleteTariff(selectedRow);
+        }
+    }
+
+    private void tariffVisibility() => isTariffVisible = false;
+
+    private void newTariffWindow()
+    {
+        isTariffVisible = true;
+    }
+
+    private void openAdminPage() => NavManager.NavigateTo("admin");
+}

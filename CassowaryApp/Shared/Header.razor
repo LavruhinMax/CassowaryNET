@@ -1,0 +1,67 @@
+﻿<style>
+    .head-panel {
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    background-color: black;
+    }
+
+    .head-logo {
+    height: 80%;
+    margin: 0 2% 0 1%;
+    cursor: pointer;
+    }
+
+    button {
+    height: 100%;
+    background-color: black;
+    color: white;
+    font-size: 1.3vw;
+    font-weight: 500;
+    border: none;
+    white-space: nowrap;
+    cursor: pointer;
+    padding: 0 2vw;
+    transition: 0.2s
+    }
+
+    button:hover {
+    background-color: rgba(40, 40, 40);
+    }
+
+    .icon-container {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0 3% 0 0;
+    }
+
+    .icon {
+    width: 2vw;
+    height: 2vw;
+    cursor: pointer;
+    margin: 0 4% 0 0;
+    }
+
+</style>
+
+<div class="head-panel">
+    <img class="head-logo" src="images/bird.png" @onclick="openMain">
+    <button @onclick="openMain">Главная</button>
+    <button @onclick="openTariffs">Мой тариф</button>
+    <button @onclick="openEquipment">Оборудование</button>
+    <button @onclick="openFAQ">FAQ</button>
+    <div class="icon-container">
+        <img class="icon" src="images/settings.jpg" @onclick="openSettings">
+    </div>
+</div>
+
+@code {
+
+    private void openMain() => NavManager.NavigateTo("main");
+    private void openTariffs() => NavManager.NavigateTo("tariffs");
+    private void openEquipment() => NavManager.NavigateTo("equip");
+    private void openFAQ() => NavManager.NavigateTo("faq");
+    private void openSettings() => NavManager.NavigateTo("settings");
+}

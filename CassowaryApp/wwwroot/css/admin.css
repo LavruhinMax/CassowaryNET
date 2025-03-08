@@ -1,0 +1,78 @@
+﻿body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: Tahoma;
+    background-color: whitesmoke;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column
+}
+
+.main {
+    width: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: whitesmoke;
+    position: relative
+}
+
+.grid {
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 5vh 0 0 0;
+    justify-content: space-between
+}
+
+.abonents, .tariffs, .equipment {
+    height: 30vh;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    margin: 3vh 0;
+    border: 1px solid black;
+    transition: 0.1s;
+    border-radius: 0.5vw;
+    cursor: pointer;
+    position: relative
+}
+
+    .abonents:hover, .tariffs:hover, .equipment:hover {
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .abonents p, .tariffs p, .equipment p {
+        position: absolute; 
+        font-size: 1.5vw;
+        font-weight: 600;
+        margin: 0;
+        bottom: 2vh;
+        right: 1vw                  
+    }
+
+    .abonents img, .tariffs img, .equipment img {
+        width: 65%;
+        height: 95%;
+        object-fit: cover;
+        object-position: center
+    }
+
+
+.abonents {
+    width: 52.5%;
+}
+
+.tariffs {
+    width: 42.5%;
+}
+
+.equipment {
+    width: 45%
+}

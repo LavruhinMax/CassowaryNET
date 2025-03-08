@@ -1,0 +1,63 @@
+﻿@page "/equip"
+@inject Equip_ViewModel ViewModel
+
+<link href="css/equip.css" rel="stylesheet" />
+<PageTitle>Оборудование</PageTitle>
+<Header />
+<div class="main">
+    <input type="text" @bind="searchOption" @oninput="inputChanged" placeholder="Поиск среди @ViewModel.examples предложений" />
+    @if(ViewModel.filteredItems.Count == 0)
+    {
+        <img class="no-results" src="images/no results.png" />
+        <p class="nothing-found">Ничего не найдено :(</p>
+    }
+    <div class="equipment">
+        @foreach (var item in ViewModel.filteredItems)
+        {
+            <OfferCard item="item" onClick="@(isOrderVisible || isOfferVisible ? () => {} : () => showOffer(item))" />
+        }
+    </div>
+</div>
+<Footer />
+
+<OfferPopup isVisible="isOfferVisible" offer="selectedOffer" method="@ViewModel.myMethod.Method" isVisibleChanged="offerVisibility" handleNewPurchase="handleNewPurchase" handleNewTransaction="handleNewTransaction"/>
+<OrderTaken isVisible="isOrderVisible" isVisibleChanged="orderVisibility"/>
+
+@code {
+    private string searchOption = string.Empty;
+    private bool isOrderVisible = false;
+    private bool isOfferVisible = false;
+    private Offer selectedOffer = new Offer();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ViewModel.InitializeAsync();
+    }
+
+    private void offerVisibility() => isOfferVisible = false;
+
+    private void orderVisibility() => isOrderVisible = false;
+
+    private async Task handleNewPurchase(Purchase pur)
+    {
+        isOrderVisible = true;
+        await ViewModel.addPurchase(pur);
+    }
+
+    private async Task handleNewTransaction(Transaction tr)
+    {
+        await ViewModel.addTransaction(tr);
+    }
+
+    private void inputChanged(ChangeEventArgs e)
+    {
+        searchOption = e.Value.ToString();
+        ViewModel.Search(searchOption);
+    }
+
+    private void showOffer(Offer off)
+    {
+        selectedOffer = off;
+        isOfferVisible = true;
+    }
+}

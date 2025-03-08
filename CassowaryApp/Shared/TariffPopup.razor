@@ -1,0 +1,155 @@
+﻿<style>
+    .tariff-popup {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 27.5%;
+    bottom: 27.5%;
+    left: 27.5%;
+    right: 27.5%;
+    background-color: white;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+    border-radius: 0.5vw;
+    overflow: hidden
+    }
+
+    .tariff-title {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        background-color: rgb(40, 40, 40)
+    }
+
+        .tariff-title p {
+        margin: 1vh 0;
+        color: white;
+        font-size: 1.2vw;
+        font-weight: 600
+        }
+
+    .tariff-first-row, .tariff-second-row {
+    display: flex;
+    height: 70%;
+    overflow: hidden;
+    width: 90%;
+    justify-content: space-between;
+    align-items: center
+    }
+
+    .tariff-second-row {
+    width: 100%;
+    flex: 1;
+    background-color: rgb(40, 40, 40)
+    }
+
+    .tariff-first-row img {
+    height: 80%;
+    object-fit: cover;
+    object-position: center
+    }
+
+    .tariff-second-row p {
+    margin: 0 3vw;
+    font-size: 1vw;
+    color: white;
+    font-style: italic;
+    font-weight: 700
+    }
+
+    .tariff-column {
+    display: flex;
+    flex: 1;
+    padding: 0 3vw;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    row-gap: 3vh
+    }
+
+    .tariff-column p {
+    margin: 0;
+    font-size: 1.1vw;
+    font-weight: 600;
+    font-style: italic
+    }
+
+    .tariff-ok-button, .tariff-cancel-button {
+    flex: 1;
+    height: 4vh;
+    margin: 0 1vw;
+    background-color: firebrick;
+    color: white;
+    font-weight: 600;
+    font-size: 0.8vw;
+    border: 1px solid firebrick;
+    border-radius: 0.4vw;
+    transition: 0.2s;
+    cursor: pointer
+    }
+
+    .tariff-cancel-button {
+    background-color: blue;
+    border: 1px solid blue
+    }
+
+    .tariff-ok-button:hover {
+    background-color: red;
+    border: 1px solid red
+    }
+
+    .tariff-cancel-button:hover {
+    background-color: darkblue;
+    border: 1px solid darkblue
+    }
+</style>
+
+
+<div class="tariff-popup" style="display:@(isVisible ? "flex" : "none" )">
+    <div class="tariff-title">
+        <p>"@tariff.Name"</p>
+    </div>
+    <div class="tariff-first-row">
+        <img src="data:image/jpeg;base64,@tariff.Illustration64" />
+        <div class="tariff-column">
+            @if (tariff.Content != null && tariff.Content.Contains("Интернет"))
+            {
+                <p>Интернет</p>
+            }
+            @if (tariff.Content != null && tariff.Content.Contains("ТВ"))
+            {
+                <p>Smart TV</p>
+            }
+            @if (tariff.Content != null && tariff.Content.Contains("SIM"))
+            {
+                <p>Мобильная связь</p>
+            }
+            @if (tariff.Content != null && tariff.Content.Contains("Видеонаблюдение"))
+            {
+                <p>Видеонаблюдение</p>
+            }
+        </div>
+    </div>
+    <div class="tariff-second-row">
+        <p>@tariff.Price ₽ / Мес</p>
+        <button class="tariff-ok-button" @onclick="Confirm">Подключить</button>
+        <button class="tariff-cancel-button" @onclick="Close">Отмена</button>
+    </div>
+</div>
+
+@code {
+    [Parameter] public bool isVisible { get; set; }
+    [Parameter] public EventCallback isVisibleChanged { get; set; }
+    [Parameter] public EventCallback handleTariffChanged { get; set; }
+    [Parameter] public Tariff tariff { get; set; }
+
+    private async Task Confirm()
+    {
+        UserContext.Tariff = tariff.TariffID;
+        await handleTariffChanged.InvokeAsync();
+        Close();
+    }
+
+    private void Close() => isVisibleChanged.InvokeAsync();
+}

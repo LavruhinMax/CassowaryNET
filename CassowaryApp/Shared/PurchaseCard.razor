@@ -1,0 +1,106 @@
+﻿<style>
+    .card {
+    width: 600px;
+    height: 130px;
+    display: flex;
+    margin: 2vh 2vw;
+    border: 1px solid black;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+    justify-content: space-between
+    }
+
+    .card img {
+    width: 130px;
+    margin: 0 0 0 20px;
+    object-fit: cover;
+    object-position: center
+    }
+
+    .info {
+    width: 450px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden
+    }
+
+    .info p {
+    width: 80%;
+    height: 65%;
+    font-size: 20px;
+    font-weight: 600;
+    color: black;
+    margin: 10px 20px;
+    padding: 0
+    }
+
+    .status {
+    width: 100%;
+    height: 35%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center
+    }
+
+    .status p {
+    width: 45%;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 600;
+    color: black;
+    margin: 10px 20px;
+    padding: 0
+    }
+</style>
+
+<div class="card">
+    @switch(purchase.itemType)
+    {
+        case "Маршрутизатор":
+            <img src="images/router.png" />
+            break;
+        case "Приставка":
+            <img src="images/tv box.png" />
+            break;
+        case "Камера":
+            <img src="images/sec camera.png" />
+            break;
+        default: break;
+    }
+    <div class="info">
+        <p>@purchase.itemName</p>
+        <div class="status">
+            <p>@purchase.purchaseMethod</p>
+            @if(purchase.purchaseMethod == "Рассрочка")
+            {
+                if(paidMonths() <= 24)
+                {
+                    <p>Выплачено @paidMonths()/24 мес</p>
+                }
+                else
+                {
+                    <p>Выплачено</p>
+                }
+            }
+            else if(purchase.purchaseMethod == "Приобретен")
+            {
+                <p>@purchase.purchaseDate.ToString("dd.MM.yyyy")</p>
+            }
+            else
+            {
+                <p>С @purchase.purchaseDate.ToString("dd.MM.yyyy")</p>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+        [Parameter]
+        public Purchase purchase { get; set; }
+
+        private int paidMonths()
+        {
+            return (DateTime.Now.Year - purchase.purchaseDate.Year) * 12 + (DateTime.Now.Month - purchase.purchaseDate.Month);
+        }
+}

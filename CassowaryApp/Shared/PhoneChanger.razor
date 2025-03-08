@@ -1,0 +1,60 @@
+﻿
+<div class="small-popup" style="display:@(isVisible ? "flex" : "none")">
+    <p class="small-pop-title">Сменить номер телефона</p>
+    <div class="input-container">
+        @if (showMessage)
+        {
+            <p class="error-txt">@(areFieldsEmpty ? "Пустое поле!" : "Неверный формат!")</p>
+        }
+        <input class="change-input" @bind="phone" @oninput="inputChanged" />
+        @if (!isFormatCorrect)
+        {
+            <img class="warn" src="images/warn.png">
+        }
+    </div>
+    <div class="button-row">
+        <button class="ok-button" @onclick="Check">Ок</button>
+        <button class="cancel-button" @onclick="Close">Отмена</button>
+    </div>
+    <img class="exit" src="images/exit.png" @onclick="Close" />
+</div>
+
+@code {
+    [Parameter] public bool isVisible { get; set; }
+    [Parameter] public EventCallback isVisibleChanged { get; set; }
+    [Parameter] public EventCallback<string> changePhone { get; set; }
+
+    private string phone = string.Empty;
+    private bool areFieldsEmpty, showMessage, isFormatCorrect;
+
+    protected override void OnParametersSet()
+    {
+        if (isVisible)
+        {
+            phone = UserContext.Phone;
+            areFieldsEmpty = false;
+            isFormatCorrect = true;
+            showMessage = false;
+        }
+    }
+
+    private void inputChanged(ChangeEventArgs e)
+    {
+        showMessage = false;
+        phone = e.Value?.ToString();
+        isFormatCorrect = FormatChecker.validatePhone(phone);
+    }
+
+    private async Task Check()
+    {
+        areFieldsEmpty = string.IsNullOrEmpty(phone);
+        if (!areFieldsEmpty && isFormatCorrect)
+        {
+            await changePhone.InvokeAsync(phone);
+            Close();
+        }
+        else showMessage = true;
+    }
+
+    private void Close() => isVisibleChanged.InvokeAsync();
+}

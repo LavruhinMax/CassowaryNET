@@ -1,0 +1,60 @@
+﻿@page "/tariffs"
+@inject Tariff_ViewModel ViewModel
+
+<link href="css/tariffs.css" rel="stylesheet" />
+<PageTitle>Тарифы</PageTitle>
+<Header />
+<div class="main">
+    <div class="mine">
+        <p>Ваш тариф: "@ViewModel.myTariff.Name"</p>
+        <p>Обновлен: @ViewModel.exchange.Date.ToString("dd.MM.yyyy")</p>
+        <p>@(UserContext.isPaused == 0 ? "Включает: " + @ViewModel.myTariff.Content : "Приостановлен")</p>
+        <button @onclick="stopTariff" disabled="@(isStopVisible || isTariffVisible)">@(UserContext.isPaused == 0 ? "Приостановить" : "Возобновить")</button>
+    </div>
+    <p class="title">Рекомендуем</p>
+    <div class="tariffs">
+        @foreach (var tar in ViewModel.tariffs)
+        {
+            if(tar.TariffID != ViewModel.myTariff.TariffID) 
+            {
+                <TariffCard tariff="tar" onClick="@(isStopVisible || isTariffVisible ? () => {} : () => showTariff(tar))" />
+            }
+        }
+    </div>
+</div>
+<Footer />
+
+<Stop isVisible="@isStopVisible" isVisibleChanged="stopVisibility" />
+<TariffPopup isVisible="@isTariffVisible" isVisibleChanged="tariffVisibility" Tariff="selectedTariff" handleTariffChanged="handleTariffChanged" />
+
+@code {
+    private Tariff selectedTariff = new Tariff();
+    private bool isStopVisible = false;
+    private bool isTariffVisible = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ViewModel.InitializeAsync();
+    }
+
+    private void stopVisibility() => isStopVisible = false;
+    private void tariffVisibility() => isTariffVisible = false;
+
+    private async Task handleTariffStopped()
+    {
+        await ViewModel.stopTariff();
+    }
+
+    private async Task handleTariffChanged()
+    {
+        await ViewModel.setNewTariff();
+    }
+
+    private void stopTariff() => isStopVisible = true;
+
+    private void showTariff(Tariff tar)
+    {
+        selectedTariff = tar;
+        isTariffVisible = true;
+    }
+}

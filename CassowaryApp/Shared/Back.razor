@@ -1,0 +1,17 @@
+﻿<style>
+    .back {
+        position: absolute;
+        width: 3vw;
+        height: 3vw;
+        top: 2vh;
+        left: 2vw;
+        cursor: pointer
+    }
+</style>
+
+<img class="back" src="images/back.png" @onclick="openPage"/>
+
+@code {
+    [Parameter]
+    public EventCallback openPage { get; set; }
+}

@@ -1,0 +1,82 @@
+﻿<style>
+    .popup {
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        top: 30%;
+        bottom: 30%;
+        left: 35%;
+        right: 35%;
+        background-color: rgb(40,40,40);
+        border-radius: 0.5vw;
+        overflow: hidden
+    }
+
+    .pop-title {
+        display: flex;
+        align-items: center;
+        height: 15%;
+        font-size: 1.6vw;
+        font-weight: 600;
+        color: white;
+        margin: 0
+    }
+
+    .row {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        column-gap: 2vw;
+        width: 100%;
+        margin: 0 2vw
+    }
+
+        .row a {
+            margin: 0;
+            width: 75%;
+            font-size: 1.3vw;
+            font-weight: 500;
+            color: white
+        }
+
+        .row img {
+            margin: 0 0 0 1vw;
+            width: 3vw;
+            height: 3vw
+        }
+
+    .exit {
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        width: 2vw;
+        height: 2vw;
+        cursor: pointer
+    }
+</style>
+
+<div class="popup" style="display:@(isVisible ? "flex" : "none")">
+    <p class="pop-title">Связаться с нами</p>
+    <div class="row">
+        <img src="images/telephone.png" />
+        <a>8-800-257-58-80</a>
+    </div>
+    <div class="row">
+        <img src="images/vk.jpg" />
+        <a href="https://vk.com" target="_blank">vk.com/cassowaryru</a>
+    </div>
+    <div class="row">
+        <img src="images/tg.png" />
+        <a href="https://web.telegram.org/a/" target="_blank">t.me/cassowary_official</a>
+    </div>
+    <img class="exit" src="images/exit.png" @onclick="Close" />
+</div>
+
+@code {
+    [Parameter] public bool isVisible { get; set; }
+    [Parameter] public EventCallback isVisibleChanged { get; set; }
+
+    private void Close() => isVisibleChanged.InvokeAsync();
+}

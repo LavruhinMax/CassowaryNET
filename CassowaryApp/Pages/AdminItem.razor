@@ -1,0 +1,109 @@
+﻿@page "/adminItem"
+@inject AdminItem_ViewModel ViewModel
+
+<link href="css/adminItem.css" rel="stylesheet" />
+<Header_v2 />
+<div class="main">
+    <Back openPage="openAdminPage" />
+    <p class="title">Список товаров</p>
+    <input type="text" placeholder="Поиск по наименованию" @oninput="inputChanged" />
+    <div class="table">
+        <div class="table-head-row">
+            <p class="id">id</p>
+            <p class="photo">Фото</p>
+            <p class="name">Наименование</p>
+            <p class="price">Стоимость</p>
+            <p class="descr">Описание</p>
+        </div>
+        @if (ViewModel.filteredItems.Count == 0)
+        {
+            <div class="nothing-found">
+                <p>&lt;Список пуст&gt;</p>
+            </div>
+        }
+        else
+        {
+            foreach (var item in ViewModel.filteredItems)
+            {
+                <div class="@(item.OfferID == selectedRow ? "selected-row" : "table-row")" @onclick="() => selectItem(item.OfferID)">
+                    <p class="id">@item.OfferID</p>
+                    <div class="img-cnt">
+                        <img src="data:image/jpeg;base64,@item.Photo64" />
+                    </div>
+                    <p class="name">@item.itemName</p>
+                    <p class="price">@item.Price ₽</p>
+                    <p class="descr">@item.Description</p>
+                </div>
+            }
+        }  
+    </div>
+    <div class="button-row">
+        <img src="images/add.png" @onclick=newItemWindow />
+        <img src="images/edit.png" />
+        <img src="images/delete.png" @onclick="Delete" />
+        @if (rowNotSelected)
+        {
+            <p>Выберите товар для редактирования/удаления!</p>
+        }
+    </div>
+</div>
+<Footer_v2 />
+
+<Item isVisible=isItemVisible isVisibleChanged="itemVisibility" />
+<DeletePopup name="@selectedName" isVisible="@isSomethingDeleted" isVisibleChanged="deleteVisibility" />
+
+@code {
+    private bool isSomethingDeleted = false;
+    private string selectedName = "";
+    private string searchOption = string.Empty;
+    private int selectedRow = 0;
+    private bool rowNotSelected = false;
+
+    private bool isItemVisible = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ViewModel.InitializeAsync();
+    }
+
+    private void selectItem(int itemId)
+    {
+        rowNotSelected = false;
+        selectedRow = itemId;
+        selectedName = ViewModel.items.FirstOrDefault(i => i.OfferID == itemId).itemName;
+    }
+
+    private void inputChanged(ChangeEventArgs e)
+    {
+        searchOption = e.Value.ToString();
+        ViewModel.Search(searchOption);
+    }
+    
+    private void Delete()
+    {
+        if (selectedRow == 0)
+        {
+            rowNotSelected = true;
+            return;
+        }
+        isSomethingDeleted = true;
+    }
+
+    private async Task deleteVisibility(bool result)
+    {
+        isSomethingDeleted = false;
+        if (result)
+        {
+            await ViewModel.deleteItem(selectedRow);
+        }
+    }
+
+    private void itemVisibility() => isItemVisible = false;
+
+    private void newItemWindow()
+    {
+        isItemVisible = true;
+    }
+
+    private void openAdminPage() => NavManager.NavigateTo("admin");
+}

@@ -1,0 +1,129 @@
+﻿<style>
+    .payment-popup {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 30%;
+    bottom: 30%;
+    left: 30%;
+    right: 30%;
+    background-color: rgb(40, 40, 40);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border-radius: 0.5vw;
+    overflow: hidden
+    }
+
+    .payment-title {
+    color: white;
+    font-size: 1.2vw;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    margin: 2vh 0
+    }
+
+    .payment-options {
+    display: flex;
+    flex: 1;
+    width: 100%
+    }
+
+    .payment-option, .selected-payment-option {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 3vh
+    }
+
+    .payment-option img, .selected-payment-option img {
+    width: 5vw;
+    height: 5vw
+    }
+
+    .payment-option p, .selected-payment-option p {
+    color: white;
+    font-size: 1.1vw;
+    font-weight: 600
+    }
+
+    .selected-payment-option {
+    background-color: indianred
+    }
+
+    .payment-button {
+    margin: 2vh 0;
+    height: 4vh;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.8vw;
+    background-color: indigo;
+    border: 1px solid indigo;
+    border-radius: 0.2vw;
+    transition: 0.2s
+    }
+
+    .payment-button:hover {
+    background-color: darkorchid;
+    border: 1px solid darkorchid
+    }
+
+    .exit {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 1.5vw;
+    height: 1.5vw;
+    cursor: pointer
+    }
+</style>
+
+<div class="payment-popup" style="display:@(isVisible ? "flex" : "none" )">
+    <p class="payment-title">Сменить способ оплаты</p>
+    <div class="payment-options">
+        <div class="@(chosenOption == "Банковская карта" ? "selected-payment-option" : "payment-option" )" @onclick="setCard">
+            <img src="images/bank card.png" />
+            <p>Банковская карта</p>
+        </div>
+        <div class="@(chosenOption == "WebMoney" ? "selected-payment-option" : "payment-option" )" @onclick="setWeb">
+            <img src="images/webmoney.png" />
+            <p>WebMoney</p>
+        </div>
+        <div class="@(chosenOption == "ЮMoney" ? "selected-payment-option" : "payment-option" )" @onclick="setYandex">
+            <img src="images/umoney.png" />
+            <p>ЮMoney</p>
+        </div>
+    </div>
+    <img class="exit" @onclick="Close" src="images/exit.png" />
+    <button class="payment-button" @onclick="Continue">Далее >></button>
+</div>
+
+@code {
+    [Parameter] public bool isVisible { get; set; }
+    [Parameter] public paymentMethod method { get; set; }
+    [Parameter] public EventCallback<string> handleNewMethod { get; set; }
+    [Parameter] public EventCallback isVisibleChanged { get; set; }
+
+    private string chosenOption = string.Empty;
+
+    private void setCard() => chosenOption = "Банковская карта";
+    private void setWeb() => chosenOption = "WebMoney";
+    private void setYandex() => chosenOption = "ЮMoney";
+
+    protected override void OnParametersSet()
+    {
+        if (isVisible) chosenOption = method.Method;
+    }
+
+    private async Task Continue()
+    {
+        await handleNewMethod.InvokeAsync(chosenOption);
+        Close();
+    }
+
+    private void Close() => isVisibleChanged.InvokeAsync();
+}

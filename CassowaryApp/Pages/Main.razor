@@ -1,0 +1,143 @@
+﻿@page "/main"
+@inject Main_ViewModel ViewModel
+
+<link href="css/main.css" rel="stylesheet" />
+<PageTitle>Главная</PageTitle>
+<Header />
+<div class="main">
+    <div class="welcome">
+        <p>Здравствуйте, @UserContext.Name!</p>
+        <p>@(UserContext.isPaused == 0 ? @ViewModel.myTariff.Price + " ₽ спишутся " + @ViewModel.paymentDate.ToString("dd.MM") : "Тариф приостановлен")<a href="/tariffs">Подробнее</a></p>
+    </div>
+    <div class="payment-method">
+        @if (ViewModel.myMethod != null)
+        {
+            @switch (ViewModel.myMethod.Method)
+            {
+                case "Банковская карта":
+                    <img src="images/bank card.png" />
+                    break;
+                case "WebMoney":
+                    <img src="images/webmoney.png" />
+                    break;
+                case "Юmoney":
+                    <img src="images/umoney.png" />
+                    break;
+                default: break;
+            }
+            @if(ViewModel.myMethod.Requisites != null)
+            {
+                <p>@ViewModel.myMethod.Requisites.Substring(ViewModel.myMethod.Requisites.Length - 4)</p>
+            }
+            <button @onclick="Change" disabled="@(isPaymentVisible || areRequisitesVisible)">Изменить способ оплаты</button>
+        }
+    </div>
+    <div class="my-tools">
+        <p>Ваше оборудование</p>
+        <div class="tools-cnt">
+            @foreach(var pr in ViewModel.purchases)
+            {
+                <PurchaseCard purchase="pr"/>
+            }
+        </div>
+    </div>
+    <div class="history">
+        <div class="history-column">
+            <p>История транзакций</p>
+            <div class="history-cnt">
+                <div class="head-row">
+                    <p>Дата</p>
+                    <p>Сумма</p>
+                    <p>Способ оплаты</p>
+                </div>
+                @if (ViewModel.transactions.Count != 0)
+                {
+                    foreach (var tr in ViewModel.transactions)
+                    {
+                        <div class="row">
+                            <p>@tr.Date.ToString("dd.MM.yyyy")</p>
+                            <p>@tr.Amount ₽</p>
+                            <p>@tr.Method</p>
+                        </div>
+                    }
+                    <div class="row">
+                        <p>.......</p>
+                        <p>.......</p>
+                        <p>.......</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="row">
+                        <p></p>
+                        <p style="color: red; font-style: italic">Список пуст</p>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="history-column">
+            <p>Изменения тарифа</p>
+            <div class="history-cnt">
+                <div class="head-row">
+                    <p>Дата</p>
+                    <p>Переход</p>
+                </div>
+                @if(ViewModel.exchanges.Count != 0)
+                {
+                    @foreach (var ex in ViewModel.exchanges)
+                    {
+                        <div class="row">
+                            <p>@ex.Date.ToString("dd.MM.yyyy")</p>
+                            @if(ex.previousTariff != null)
+                            {
+                                <p>@ex.previousTariff -> @ex.newTariff</p>
+                            }
+                            else
+                            {
+                                <p>--@ex.newTariff--</p>
+                            }
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="row">
+                        <p></p>
+                        <p style="color: red; font-style: italic">Изменений пока не было</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<Footer />
+
+<PaymentPopup isVisible="isPaymentVisible" method="@ViewModel.myMethod" isVisibleChanged="paymentVisibility" handleNewMethod="handleNewMethod"/>
+<Requisites isVisible="areRequisitesVisible" updateMethod="updateMethod" method="@option" isVisibleChanged="reqVisibility" />
+
+@code {
+    private bool isPaymentVisible = false;
+    private bool areRequisitesVisible = false;
+    private string option = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ViewModel.InitializeAsync();
+    }
+
+    private void paymentVisibility() => isPaymentVisible = false;
+    private void reqVisibility() => areRequisitesVisible = false;
+
+    private void handleNewMethod(string opt)
+    {
+        option = opt;
+        areRequisitesVisible = true;
+    }
+
+    private async Task updateMethod(paymentMethod method)
+    {
+        await ViewModel.updatePayment(method);
+    }
+
+    private void Change() => isPaymentVisible = true;
+}

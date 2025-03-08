@@ -1,0 +1,165 @@
+﻿body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: Tahoma;
+    background-color: whitesmoke;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column
+}
+
+.main {
+    width: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: whitesmoke
+}
+
+.welcome {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: rgb(40, 40, 40);
+    color: white;
+    font-weight: 700
+}
+
+    .welcome p {
+        width: 100%;
+        font-size: 1.2vw;
+        margin: 2vh 3vw
+    }
+
+a {
+    text-decoration: underline;
+    cursor: pointer;
+    color: white;
+    margin: 0 0 0 2vw
+}
+
+    a:hover {
+        color: #CD5700
+    }
+
+.payment-method {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2vh 0 3vh 0;
+    background-color: rgb(40, 40, 40)
+}
+    .payment-method img {
+        height: 4vw;
+        width: 4vw;
+        margin: 0 0 0 3vw
+    }
+
+    .payment-method p {
+        font-size: 1.2vw;
+        font-weight: 600;
+        color: white;
+        margin: 0 0 0 1vw
+    }
+
+    .payment-method button {
+        height: 4vh;
+        margin: 0 0 0 3vw;
+        background-color: #CD5700;
+        border: 1px solid #CD5700;
+        font-size: 1vw;
+        font-weight: 600;
+        color: white;
+        border-radius: 0.3vw
+    }
+
+        .payment-method button:hover {
+            background-color: darkorange;
+            border: 1px solid darkorange
+        }
+
+.my-tools {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center
+}
+
+    .my-tools p, .history p {
+        width: 100%;
+        text-align: start;
+        font-size: 0.9vw;
+        font-weight: 600;
+        margin: 0 0 0 5vw;
+        color: #CD5700;
+        padding: 2vh 0
+    }
+
+    .history p {
+        margin: 0;
+        color: #2b2c42
+    }
+
+.tools-cnt {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap
+}
+
+.history {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    column-gap: 5vw
+}
+
+.history-column {
+    width: 45%;
+    display: flex;
+    flex-direction: column
+}
+
+.history-cnt {
+    width: 100%;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
+    margin: 0 0 5vh 0
+}
+
+.row {
+    width: 100%;
+    display: flex
+}
+
+.head-row {
+    width: 100%;
+    display: flex;
+    border-bottom: 2px solid #CD5700
+}
+
+    .row p, .head-row p {
+        width: 25%;
+        padding: 1vh 2vw;
+        margin: 0;
+        font-style: italic;
+        font-weight: 500
+    }
+
+    .head-row p {
+        padding: 1.5vh 2vw;
+        font-style: normal;
+        font-weight: 600
+    }

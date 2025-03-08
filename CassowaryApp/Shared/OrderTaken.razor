@@ -1,0 +1,74 @@
+﻿<style>
+    .order-popup {
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        row-gap: 2vh;
+        top: 35%;
+        bottom: 35%;
+        left: 35%;
+        right: 35%;
+        background-color: rgb(40, 40, 40);
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+        border-radius: 0.5vw;
+        overflow: hidden
+    }
+
+        .order-popup img {
+            margin: 2vh 0 0 0;
+            width: 5vw;
+            height: 5vw
+        }
+
+        .order-popup p {
+            width: 100%;
+            text-align: center;
+            color: white;
+            width: 100%;
+            margin: 0 1vw;
+            font-size: 1vw;
+        }
+
+        .order-popup button {
+            height: 3vh;
+            width: 40%;
+            font-size: 0.7vw;
+            font-weight: 600;
+            border-radius: 0.3vw;
+            color: white;
+            background-color: cadetblue;
+            transition: 0.2s;
+            cursor: pointer
+        }
+
+            .order-popup button:hover {
+                background-color: darkcyan
+            }
+
+    .order-popup img.exit {
+        position: absolute;
+        margin: 0;
+        top: 15px;
+        right: 15px;
+        width: 1.5vw;
+        height: 1.5vw;
+        cursor: pointer
+    }
+</style>
+
+<div class="order-popup" style="display:@(isVisible ? "flex" : "none" )">
+    <img src="images/success.png" />
+    <p>Ваш заказ принят!</p>
+    <p>@DateTime.Now</p>
+    <button @onclick="Close">Ок</button>
+    <img class="exit" src="images/exit.png" @onclick="Close" />
+</div>
+
+@code {
+    [Parameter] public bool isVisible { get; set; }
+    [Parameter] public EventCallback isVisibleChanged { get; set; }
+
+    private void Close() => isVisibleChanged.InvokeAsync();
+}

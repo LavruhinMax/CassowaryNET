@@ -1,0 +1,84 @@
+﻿<style>
+    .popup {
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        top: 43%;
+        bottom: 43%;
+        left: 40%;
+        right: 40%;
+        background-color: whitesmoke;
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+        overflow: hidden
+    }
+
+        .popup p {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60%;
+            line-height: 2vh;
+            margin: 1vh 0.5vw;
+            font-size: 0.7vw;
+            font-weight: 600
+        }
+
+    .buttons {
+        height: 40%;
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center
+    }
+
+    .yes, .no {
+        width: 30%;
+        height: 3vh;
+        background-color: red;
+        color: white;
+        font-weight: 600;
+        font-size: 0.8vw;
+        padding: 0 0.5vw;
+        border: 1px solid red;
+        transition: 0.2s;
+        cursor: pointer
+    }
+
+    .no {
+        background-color: lightgray;
+        color: black;
+        border: none
+    }
+
+    .yes:hover {
+        background-color: darkred;
+        border: 1px solid darkred
+    }
+
+    .no:hover {
+        background-color: gray;
+        border: 1px solid gray
+    }
+</style>
+
+<div class="popup" style="display:@(isVisible ? "flex" : "none")">
+    <p>@name будет навсегда удален(а) из базы данных. Продолжить?</p>
+    <div class="buttons">
+        <button class="yes" @onclick="Confirm">Да</button>
+        <button class="no" @onclick="Close">Отмена</button>
+    </div>
+</div>
+
+
+@code {
+    [Parameter] public bool isVisible { get; set; }
+    [Parameter] public string? name { get; set; }
+    [Parameter] public EventCallback<bool> isVisibleChanged { get; set; }
+
+    private void Confirm() => isVisibleChanged.InvokeAsync(true);
+
+    private void Close() => isVisibleChanged.InvokeAsync(false);
+
+}

@@ -1,0 +1,53 @@
+﻿body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: Tahoma;
+    background-color: whitesmoke;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column
+}
+
+.main {
+    width: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    overflow-y: auto;
+    background-color: whitesmoke
+}
+
+input {
+    width: 90%;
+    padding: 1vh;
+    margin: 5vh 0;
+    border: 1px solid black;
+    border-radius: 0.4vw;
+    font-size: 1vw;
+    transition: border-color 0.3s;
+}
+
+    input:focus {
+        border-color: #CD5700;
+        outline: none;
+    }
+
+.equipment {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.no-results {
+    margin: 3vh 0;
+    width: 15vw;
+    height: 15vw
+}
+
+.nothing-found {
+    font-size: 1vw;
+    font-weight: 500
+}

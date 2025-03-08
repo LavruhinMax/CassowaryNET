@@ -1,0 +1,118 @@
+﻿<style>
+    .small-popup {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 40%;
+    bottom: 40%;
+    left: 37.5%;
+    right: 37.5%;
+    background-color: whitesmoke;
+    border-radius: 0.5vw;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+    overflow: hidden
+    }
+
+    .small-pop-title {
+    display: flex;
+    align-items: flex-start;
+    margin: 2vh 0 0 0;
+    height: 20%;
+    font-size: 1vw;
+    font-weight: 600
+    }
+
+    .error-txt {
+    top: -10%;
+    font-size: 0.8vw
+    }
+
+    .input-container {
+    position: relative;
+    height: 40%;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center
+    }
+
+    .change-input {
+    width: 100%;
+    font-size: 1vw;
+    font-weight: 600;
+    height: 4vh;
+    padding: 0 0 0 1%;
+    border: 1px solid black;
+    border-radius: 0.4vw;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5)
+    }
+
+    .warn {
+    position: absolute;
+    left: -10%;
+    height: 50%;
+    }
+
+</style>
+
+<div class="small-popup" style="display:@(isVisible ? "flex" : "none")">
+    <p class="small-pop-title">Сменить эл. почту</p>
+    <div class="input-container">
+        @if (showMessage)
+        {
+            <p class="error-txt">@(areFieldsEmpty ? "Пустое поле!" : "Неверный формат!")</p>
+        }
+        <input class="change-input" @bind="mail" @oninput="inputChanged" />
+        @if (!isFormatCorrect)
+        {
+            <img class="warn" src="images/warn.png">
+        }
+    </div>
+    <div class="button-row">
+        <button class="ok-button" @onclick="Check">Ок</button>
+        <button class="cancel-button" @onclick="Close">Отмена</button>
+    </div>
+    <img class="exit" src="images/exit.png" @onclick="Close" />
+</div>
+
+@code {
+    [Parameter] public bool isVisible { get; set; }
+    [Parameter] public EventCallback isVisibleChanged { get; set; }
+    [Parameter] public EventCallback<string> changeMail { get; set; }
+
+    private string mail = string.Empty;
+    private bool areFieldsEmpty, isFormatCorrect, showMessage;
+
+    protected override void OnParametersSet()
+    {
+        if (isVisible)
+        {
+            mail = UserContext.Email;
+            areFieldsEmpty = false;
+            isFormatCorrect = true;
+            showMessage = false;
+        }
+    }
+
+    private void inputChanged(ChangeEventArgs e)
+    {
+        showMessage = false;
+        mail = e.Value?.ToString();
+        isFormatCorrect = FormatChecker.validateMail(mail);
+    }
+
+    private async Task Check()
+    {
+        areFieldsEmpty = string.IsNullOrEmpty(mail);
+        if (!areFieldsEmpty && isFormatCorrect)
+        {
+            await changeMail.InvokeAsync(mail);
+            Close();
+        }
+        else showMessage = true;
+    }
+
+    private void Close() => isVisibleChanged.InvokeAsync();
+}

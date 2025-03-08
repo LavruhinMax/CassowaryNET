@@ -1,0 +1,153 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Cassowary_.NET
+build_property.RootNamespace = Cassowary_.NET
+build_property.ProjectDir = C:\Users\Максим\Documents\Projects\CassowaryApp\CassowaryApp\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Максим\Documents\Projects\CassowaryApp\CassowaryApp
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 6.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Pages/AboutUs.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWJvdXRVcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Pages/AdminAbonent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5BYm9uZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Pages/AdminItem.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5JdGVtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Pages/AdminPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5QYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Pages/AdminTariff.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5UYXJpZmYucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Pages/Equip.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXF1aXAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Pages/FAQ.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRkFRLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Pages/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Pages/Main.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Pages/Policy.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9saWN5LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Pages/Settings.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ3MucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Pages/Tariffs.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGFyaWZmcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Shared/Back.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEJhY2sucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Shared/Contacts.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbnRhY3RzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Shared/DeletePopup.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXERlbGV0ZVBvcHVwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Shared/EmailChanger.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEVtYWlsQ2hhbmdlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Shared/Footer v2.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEZvb3RlciB2Mi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Shared/Footer.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEZvb3Rlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Shared/Header v2.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEhlYWRlciB2Mi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Shared/Header.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEhlYWRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Shared/OfferCard.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE9mZmVyQ2FyZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Shared/PasswordChanger.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFBhc3N3b3JkQ2hhbmdlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Shared/PaymentPopup.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFBheW1lbnRQb3B1cC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Shared/PhoneChanger.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFBob25lQ2hhbmdlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Shared/PurchaseCard.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFB1cmNoYXNlQ2FyZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Shared/Stop.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN0b3AucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Shared/TariffCard.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFRhcmlmZkNhcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Shared/TariffPopup.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFRhcmlmZlBvcHVwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-egq12d8e2f
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Максим/Documents/Projects/CassowaryApp/CassowaryApp/Pages/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

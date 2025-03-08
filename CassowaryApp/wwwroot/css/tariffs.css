@@ -1,0 +1,75 @@
+﻿body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: Tahoma;
+    background-color: whitesmoke;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column
+}
+
+.main {
+    width: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: whitesmoke
+}
+
+.mine {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 0 1vh 0;
+    background-color: rgb(40, 40, 40);
+    flex-wrap: wrap
+}
+
+    .mine p {
+        width: 37.5%;
+        padding: 2vh 5vw;
+        font-size: 1.3vw;
+        font-weight: 600;
+        margin: 0;
+        color: white
+    }
+
+    .mine button {
+        height: 4vh;
+        margin: 0 0 0 5vw;
+        color: white;
+        font-size: 1vw;
+        font-weight: 600;
+        background-color: olive;
+        border: 1px solid olive;
+        border-radius: 0.3vw
+    }
+
+        .mine button:hover {
+            background-color: darkolivegreen;
+            border: 1px solid darkolivegreen
+        }
+
+.title {
+    width: 100%;
+    text-align: center;
+    margin: 3vh 0 4vh 0;
+    font-size: 1.6vw;
+    font-weight: 1000;
+    color: #2b2c42
+}
+
+.tariffs {
+    width: 95%;
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 3vw;
+    align-items: center;
+    flex-wrap: wrap
+}

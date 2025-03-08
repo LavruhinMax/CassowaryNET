@@ -1,0 +1,139 @@
+﻿body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: Tahoma;
+    background-color: whitesmoke;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column
+}
+
+.main {
+    width: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    overflow-y: auto;
+    background-color: whitesmoke
+}
+
+.title {
+    margin: 0;
+    padding: 3vh 0;
+    font-size: 1.5vw;
+    font-weight: bold
+}
+
+.container {
+    width: 85%;
+    background-color: rgba(20, 20, 20);
+    display: flex;
+    flex-wrap: wrap
+}
+
+.unit {
+    display: flex;
+    width: 40%;
+    padding: 3vh 3vw;
+    justify-content: space-between;
+    align-items: center
+}
+
+    .unit p {
+        color: white;
+        font-size: 1vw;
+        font-weight: 600
+    }
+
+    .unit input, .contacts input {
+        height: 4vh;
+        width: 60%;
+        background-color: whitesmoke;
+        border-radius: 0.2vw;
+        font-size: 1.2vw;
+        font-weight: 600;
+    }
+
+    .unit img {
+        height: 5vh;
+        width: 5vh;
+        cursor: pointer
+    }
+
+    .contacts input {
+        width: 55%
+    }
+
+        .contacts input:focus {
+            border-color: #CD5700;
+            outline: none
+        }
+
+.contacts {
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .contacts p {
+        font-size: 1vw;
+        font-weight: 600;
+        color: black;
+        width: 35%
+    }
+
+
+.warn-cnt {
+    display: flex;
+    width: 80%;
+    align-items: center;
+    justify-content: space-between
+}
+
+    .warn-cnt button {
+        background-color: #18171c;
+        border-radius: 0.3vw;
+        font-size: 1.2vw;
+        font-weight: 600;
+        cursor: pointer;
+        height: 80%;
+        margin: 0 0 0 5vw
+    }
+
+        .warn-cnt button:hover {
+            background-color: darkgray;
+            color: #18171c
+        }
+
+        .warn-cnt button.exit-button {
+            background-color: indianred;
+            border: 1px solid indianred
+        }
+
+        .warn-cnt button.exit-button:hover {
+            background-color: whitesmoke;
+            color: indianred
+        }
+
+.warning {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    background-color: lightgray;
+    border-radius: 0.5vw
+}
+    .warning img {
+        height: 4vh;
+        width: 1vh;
+        margin: 0.5vh 0 0.5vh 1vw
+    }
+
+    .warning p {
+        font-size: 0.8vw;
+        font-weight: 600;
+        margin: 2vh 1vw
+    }

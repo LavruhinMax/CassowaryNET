@@ -1,0 +1,207 @@
+﻿<style>
+    .abonent-popup {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 25%;
+    bottom: 25%;
+    left: 20%;
+    right: 20%;
+    background-color: whitesmoke;
+    border-radius: 0.5vw;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+    overflow: hidden
+    }
+
+    .abonent-popup p {
+    margin: 2vh 0;
+    font-size: 1vw;
+    font-weight: 600
+    }
+
+
+    .abonent-field-cnt {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    flex-wrap: wrap;
+    background-color: gainsboro;
+    justify-content: space-between;
+    }
+
+
+    .abonent-input-cnt {
+    margin: 1vh 2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start
+    }
+
+    .abonent-input-cnt p {
+    margin: 0 0 1vh 0;
+    font-size: 0.8vw;
+    font-weight: 600
+    }
+
+    .abonent-input-cnt input, .abonent-input-cnt select {
+    width: 100%;
+    font-size: 0.8vw;
+    font-weight: 600;
+    height: 4vh;
+    padding: 0 0 0 1%;
+    border-radius: 0;
+    border: 1px solid black;
+    margin: 0;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5)
+    }
+
+    .abonent-input-cnt input:focus {
+    border-color: indigo;
+    outline: none
+    }
+
+    .button-cnt {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    column-gap: 1vw;
+    height: 15%;
+    width: 100%
+    }
+
+    .button-cnt-done, .button-cnt-cancel {
+    height: 4vh;
+    border: 1px solid indianred;
+    background-color: indianred;
+    color: white;
+    font-weight: 600;
+    font-size: 0.8vw;
+    padding: 0 0.5vw;
+    border-radius: 0.3vw;
+    transition: 0.2s;
+    cursor: pointer
+    }
+
+    .button-cnt-cancel {
+    margin: 0 1vw 0 0;
+    border: 1px solid lightblue;
+    background-color: lightblue
+    }
+
+    .button-cnt-done:hover {
+    background-color: red;
+    }
+
+    .button-cnt-cancel:hover {
+    background-color: lightskyblue
+    }
+
+    .exit {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    width: 2vw;
+    height: 2vw;
+    cursor: pointer
+    }
+
+</style>
+
+<div class="abonent-popup" style="display:@(isVisible ? "flex" : "none")">
+    <p>@(isAdding ? "Новый абонент" : "Изменить данные")</p>
+    <div class="abonent-field-cnt">
+        <div class="abonent-input-cnt" style="width: 25%">
+            <p>Фамилия</p>
+            <input @bind="lName" />
+        </div>
+        <div class="abonent-input-cnt" style="width: 25%">
+            <p>Имя</p>
+            <input @bind="fName" />
+        </div>
+        <div class="abonent-input-cnt" style="width: 25%">
+            <p>Отчество</p>
+            <input @bind="mName" />
+        </div>
+        <div class="abonent-input-cnt" style="width: 60%">
+            <p>Адрес</p>
+            <input @bind="adress" />
+        </div>
+        <div class="abonent-input-cnt" style="width: 20%">
+            <p>Технология</p>
+            <select @bind="technology">
+                <option>FTTX</option>
+                <option>PON</option>
+                <option>ADSL</option>
+            </select>
+        </div>
+        <div class="abonent-input-cnt" style="width: 40%">
+            <p>E-mail</p>
+            <input @bind="email" />
+        </div>
+        <div class="abonent-input-cnt" style="width: 40%">
+            <p>Номер телефона</p>
+            <input @bind="phone" />
+        </div>
+    </div>
+    <div class="button-cnt">
+        <button class="button-cnt-done" @onclick="Confirm">@(isAdding ? "Добавить" : "Изменить")</button>
+        <button class="button-cnt-cancel" @onclick="Close">Отмена</button>
+    </div>
+    <img class="exit" src="images/exit.png" @onclick="Close" />
+</div>
+
+@code {
+    [Parameter] public bool isVisible { get; set; }
+    [Parameter] public EventCallback isVisibleChanged { get; set; }
+    [Parameter] public EventCallback<Customer> newAbonent { get; set; }
+    [Parameter] public EventCallback<Customer> editAbonent { get; set; }
+    [Parameter] public bool isAdding { get; set; }
+    [Parameter] public Customer abonent { get; set; }
+    [Parameter] public Customer lastAbonent { get; set; }
+
+    private string fName = string.Empty, mName = string.Empty, lName = string.Empty, adress = string.Empty, technology = string.Empty, email = string.Empty, phone = string.Empty;
+
+    protected override void OnParametersSet()
+    {
+        fName = isVisible && !isAdding ? abonent.firstName : string.Empty;
+        mName = isVisible && !isAdding ? abonent.middleName : string.Empty;
+        lName = isVisible && !isAdding ? abonent.lastName : string.Empty;
+        adress = isVisible && !isAdding ? abonent.Adress : string.Empty;
+        technology = isVisible && !isAdding ? abonent.Technology : string.Empty;
+        email = isVisible && !isAdding ? abonent.Email: string.Empty;
+        phone = isVisible && !isAdding ? abonent.phoneNumber : string.Empty;
+    }
+
+    private async Task Confirm()
+    {
+        Customer ab = new Customer()
+            {
+                TariffID = 1,
+                firstName = fName,
+                middleName = mName,
+                lastName = lName,
+                Adress = adress,
+                isPaused = 0,
+                Technology = technology,
+                Email = email,
+                phoneNumber = phone
+            };
+
+        if (isAdding)
+        {
+            int temp = Int32.Parse(lastAbonent.LSNumber) + 1;
+            ab.LSNumber = temp.ToString();
+            await newAbonent.InvokeAsync(ab);
+        }
+        else
+        {
+            ab.CustomerID = abonent.CustomerID;
+            await editAbonent.InvokeAsync(ab);
+        }
+        Close();
+    }
+
+    private void Close() => isVisibleChanged.InvokeAsync();
+}
