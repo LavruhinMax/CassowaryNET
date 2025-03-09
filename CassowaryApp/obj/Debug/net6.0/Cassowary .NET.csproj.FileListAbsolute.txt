@@ -1,8 +1,0 @@
-C:\Users\Максим\Documents\Projects\CassowaryApp\CassowaryApp\obj\Debug\net6.0\Cassowary .NET.csproj.AssemblyReference.cache
-C:\Users\Максим\Documents\Projects\CassowaryApp\CassowaryApp\obj\Debug\net6.0\Cassowary .NET.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Максим\Documents\Projects\CassowaryApp\CassowaryApp\obj\Debug\net6.0\Cassowary .NET.AssemblyInfoInputs.cache
-C:\Users\Максим\Documents\Projects\CassowaryApp\CassowaryApp\obj\Debug\net6.0\Cassowary .NET.AssemblyInfo.cs
-C:\Users\Максим\Documents\Projects\CassowaryApp\CassowaryApp\obj\Debug\net6.0\Cassowary .NET.csproj.CoreCompileInputs.cache
-C:\Users\Максим\Documents\Projects\CassowaryApp\CassowaryApp\obj\Debug\net6.0\Cassowary .NET.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Максим\Documents\Projects\CassowaryApp\CassowaryApp\obj\Debug\net6.0\Cassowary .NET.RazorAssemblyInfo.cache
-C:\Users\Максим\Documents\Projects\CassowaryApp\CassowaryApp\obj\Debug\net6.0\Cassowary .NET.RazorAssemblyInfo.cs
