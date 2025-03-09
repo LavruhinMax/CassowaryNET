@@ -11,7 +11,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=Data/UserDB.db"));
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddScoped<SQLiteService>();
 builder.Services.AddScoped<Encryptor>();
 builder.Services.AddScoped<Tariff_ViewModel>();
 builder.Services.AddScoped<Equip_ViewModel>();

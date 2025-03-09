@@ -1,7 +1,20 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\\u041C\u0430\u043A\u0441\u0438\u043C\\Documents\\Projects\\CassowaryApp\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B03BD35E-D4D9-4E9F-A5AE-3E3FD382348A}|CassowaryApp\\CassowaryApp.csproj|c:\\users\\\u043C\u0430\u043A\u0441\u0438\u043C\\documents\\projects\\cassowaryapp\\cassowaryapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B03BD35E-D4D9-4E9F-A5AE-3E3FD382348A}|CassowaryApp\\CassowaryApp.csproj|solutionrelative:cassowaryapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B03BD35E-D4D9-4E9F-A5AE-3E3FD382348A}|CassowaryApp\\CassowaryApp.csproj|c:\\users\\\u043C\u0430\u043A\u0441\u0438\u043C\\documents\\projects\\cassowaryapp\\cassowaryapp\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B03BD35E-D4D9-4E9F-A5AE-3E3FD382348A}|CassowaryApp\\CassowaryApp.csproj|solutionrelative:cassowaryapp\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B03BD35E-D4D9-4E9F-A5AE-3E3FD382348A}|CassowaryApp\\CassowaryApp.csproj|c:\\users\\\u043C\u0430\u043A\u0441\u0438\u043C\\documents\\projects\\cassowaryapp\\cassowaryapp\\pages\\equip.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B03BD35E-D4D9-4E9F-A5AE-3E3FD382348A}|CassowaryApp\\CassowaryApp.csproj|solutionrelative:cassowaryapp\\pages\\equip.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,8 +22,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\\u041C\u0430\u043A\u0441\u0438\u043C\\Documents\\Projects\\CassowaryApp\\CassowaryApp\\Program.cs",
+              "RelativeDocumentMoniker": "CassowaryApp\\Program.cs",
+              "ToolTip": "C:\\Users\\\u041C\u0430\u043A\u0441\u0438\u043C\\Documents\\Projects\\CassowaryApp\\CassowaryApp\\Program.cs*",
+              "RelativeToolTip": "CassowaryApp\\Program.cs*",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAwAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-09T20:07:08.359Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
@@ -26,6 +52,32 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "_Imports.razor",
+              "DocumentMoniker": "C:\\Users\\\u041C\u0430\u043A\u0441\u0438\u043C\\Documents\\Projects\\CassowaryApp\\CassowaryApp\\_Imports.razor",
+              "RelativeDocumentMoniker": "CassowaryApp\\_Imports.razor",
+              "ToolTip": "C:\\Users\\\u041C\u0430\u043A\u0441\u0438\u043C\\Documents\\Projects\\CassowaryApp\\CassowaryApp\\_Imports.razor",
+              "RelativeToolTip": "CassowaryApp\\_Imports.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-09T20:06:51.816Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Equip.razor",
+              "DocumentMoniker": "C:\\Users\\\u041C\u0430\u043A\u0441\u0438\u043C\\Documents\\Projects\\CassowaryApp\\CassowaryApp\\Pages\\Equip.razor",
+              "RelativeDocumentMoniker": "CassowaryApp\\Pages\\Equip.razor",
+              "ToolTip": "C:\\Users\\\u041C\u0430\u043A\u0441\u0438\u043C\\Documents\\Projects\\CassowaryApp\\CassowaryApp\\Pages\\Equip.razor",
+              "RelativeToolTip": "CassowaryApp\\Pages\\Equip.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-09T20:06:19.586Z",
+              "EditorCaption": ""
             }
           ]
         }
