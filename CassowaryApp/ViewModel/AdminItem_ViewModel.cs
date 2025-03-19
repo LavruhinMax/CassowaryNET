@@ -43,12 +43,6 @@ namespace CassowaryApp.ViewModel
             }
         }
 
-        public byte[] LoadImageToByteArray(string imagePath)
-        {
-            string fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", imagePath);
-            return File.ReadAllBytes(fullPath);
-        }
-
         public async Task addItem(Offer it)
         {
             _context.Offer.Add(it);
